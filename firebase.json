@@ -1,7 +1,6 @@
 {
   "hosting": {
-    "site": "entertainmeaman",
-    "public": ".svelte-kit",
+    "public": "public",
     "ignore": [
       "firebase.json",
       "**/.*",
