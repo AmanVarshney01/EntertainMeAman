@@ -1,29 +1,26 @@
-<!-- <script context="module">
-    export async function load({ fetch }) {
-        const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=0f30077ee9f1be6f1d82b08eb555e7af&language=en-US&page=1`)
-        const data = await res.json()
-        if (res.ok) {
-            return {
-                props: {popular: data.results}
-            }
-    }
-    }
-</script> -->
+<script lang="ts">
 
-<!-- <script lang="ts">
-    // export let popular;
-    // console.log(popular)
-    let movie: string;
+	import { onMount } from 'svelte';
+	const apiKey = '2c710afd'
+	let data: any;
+	let movie: any = {};
 
-	fetch('https://api.themoviedb.org/3/movie/550?api_key=0f30077ee9f1be6f1d82b08eb555e7af')
-		.then((response) => {
-            response.json()
-            console.log(response)
-        })
-		.then((movie) => {
-			movie = movie;
-		})
-    // console.log(response)
-</script> -->
+	async function getDetails (movieName: string) {
+		data = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${movieName}`).then((x) => x.json());
+		movie = {...data}
+	};
 
-<h1 class="font-bold ">Entertain Me Aman</h1>
+	getDetails('Top_Gun_Maverick')
+
+</script>
+
+<pre>
+  {movie.Title}
+</pre>
+
+<p>
+	
+</p>
+
+  
+  
