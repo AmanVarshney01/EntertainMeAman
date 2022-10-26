@@ -5,7 +5,7 @@
 	let movie: any = {};
 
 	async function getDetails (movieName: string) {
-		data = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${movieName}`).then((x) => x.json());
+		data = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${movieName}`).then((x) => x.json());
 		movie = {...data}
 	};
 
