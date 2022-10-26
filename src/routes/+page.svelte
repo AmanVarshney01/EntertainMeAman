@@ -10,16 +10,20 @@
     }
 </script> -->
 
-<script lang="ts">
+<!-- <script lang="ts">
     // export let popular;
     // console.log(popular)
     let movie: string;
 
-	fetch('https://api.themoviedb.org/3/movie/popular?api_key=0f30077ee9f1be6f1d82b08eb555e7af&language=en-US&page=1')
-		.then((response) => response.json())
+	fetch('https://api.themoviedb.org/3/movie/550?api_key=0f30077ee9f1be6f1d82b08eb555e7af')
+		.then((response) => {
+            response.json()
+            console.log(response)
+        })
 		.then((movie) => {
-			movie = movie.original_title;
+			movie = movie;
 		})
-</script>
+    // console.log(response)
+</script> -->
 
-<h1 class="font-bold ">Entertain Me Aman {movie}</h1>
+<h1 class="font-bold ">Entertain Me Aman</h1>
