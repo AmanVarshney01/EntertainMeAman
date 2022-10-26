@@ -5,12 +5,12 @@
 	let data: any;
 	let movie: any = {};
 
-	async function getDetails (movieName: string) {
-		data = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=${movieName}`).then((x) => x.json());
+	onMount(async function () {
+		data = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&t=dangal`).then((x) => x.json());
 		movie = {...data}
-	};
+	});
 
-	getDetails('Top_Gun_Maverick')
+	// getDetails('Top_Gun_Maverick')
 
 </script>
 
