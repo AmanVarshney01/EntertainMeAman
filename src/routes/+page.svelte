@@ -13,13 +13,9 @@
 
 </script>
 
-<pre>
-	{JSON.stringify(movie)}
-  {movie.Title}
-</pre>
-
 <p>
-	
+	{JSON.stringify(movie)}
+  	{movie.Title}
 </p>
 
   
