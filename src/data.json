@@ -1,5 +1,6 @@
 {
-    "movies": ["the_batman", "Top_Gun_Maverick", "Kung_Fu_Panda"],
+    "movies": ["the_batman", "Top_Gun_Maverick", "joker", "dangal", "pk"],
+    "animatedMovies": ["Kung_Fu_Panda_3", "kung_fu_panda_2", "kung_fu_panda"],
     "series": [],
     "games": [],
     "anime": []
