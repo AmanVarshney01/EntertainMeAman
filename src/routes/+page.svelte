@@ -2,23 +2,26 @@
 	const apiKey = '2c710afd'
 	let data: any;
 	let movie: any = {};
+	let movieList = ["the_batman", "Top_Gun_Maverick", "Kung_Fu_Panda", ]
 
-	async function getDetails (movieName: string) {
-		data = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${movieName}`).then((x) => x.json());
+
+	async function getDetails () {
+		let randomMovie = movieList[Math.floor(Math.random()*movieList.length)]
+		data = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${randomMovie}`).then((x) => x.json());
 		movie = {...data}
 	};
 
-	getDetails('Top_Gun_Maverick')
-
+	// getDetails('Breaking_Bad')
 </script>
 
-<h1><button>Entertain Me Aman</button></h1>
+<div class="">
+	<h1><button on:click={getDetails}>Entertain Me Aman</button></h1>
 
-<p>
-	{JSON.stringify(movie)}
-  	{movie.Title}
-</p>
-<img class="w-1/4 h-1/4" src="{movie.Poster}" alt="{movie.Title} Poster">
+	<p>
+		{JSON.stringify(movie)}
+  		{movie.Title}
+	</p>
+	<img class="h-1/4 w-auto" src="{movie.Poster}" alt="{movie.Title} Poster">
+</div>
 
-  
   
