@@ -1,5 +1,4 @@
 <script lang="ts">
-
 	const apiKey = '2c710afd'
 	let data: any;
 	let movie: any = {};
@@ -13,10 +12,13 @@
 
 </script>
 
+<h1><button>Entertain Me Aman</button></h1>
+
 <p>
 	{JSON.stringify(movie)}
   	{movie.Title}
 </p>
+<img class="w-1/4 h-1/4" src="{movie.Poster}" alt="{movie.Title} Poster">
 
   
   
