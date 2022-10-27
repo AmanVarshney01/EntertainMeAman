@@ -1,12 +1,13 @@
 <script lang="ts">
+
+	import {movies} from "../data.json";
+
 	const apiKey = '2c710afd'
 	let data: any;
 	let movie: any = {};
-	let movieList = ["the_batman", "Top_Gun_Maverick", "Kung_Fu_Panda", ]
-
 
 	async function getDetails () {
-		let randomMovie = movieList[Math.floor(Math.random()*movieList.length)]
+		let randomMovie = movies[Math.floor(Math.random()*movies.length)]
 		data = await fetch(`https://www.omdbapi.com/?apikey=${apiKey}&t=${randomMovie}`).then((x) => x.json());
 		movie = {...data}
 	};
