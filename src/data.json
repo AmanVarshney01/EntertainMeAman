@@ -1,7 +1,7 @@
 {
-    "movies": ["the_batman", "Top_Gun_Maverick", "joker", "dangal", "pk"],
+    "movies": ["414906", "361743", "475557", "360814", "297222"],
     "animatedMovies": ["Kung_Fu_Panda_3", "kung_fu_panda_2", "kung_fu_panda"],
     "shows": ["breaking_bad", "the_walking_dead", "peaky_blinders"],
-    "games": [],
+    "games": ["far-cry-3", "max-payne-3"],
     "animes": []
 }
