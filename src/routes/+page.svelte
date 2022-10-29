@@ -25,7 +25,7 @@
 
 	async function getShowDetails () {
 		let random: string = shows[Math.floor(Math.random() * shows.length)]
-		let data: any = await fetch(`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json())
+		let data: any = await fetch(`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json())
 		show = {...data}
 	}
 
@@ -68,8 +68,8 @@
 	{#if show}
 	<div>
 	
-		<img class="w-auto h-3/5" src="{show.Poster}" alt="{show.Title} Poster">
-		<h1>{show.Title}</h1>
+		<h1>{show.title}</h1>
+		<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
 
 	</div>
 	{/if}
