@@ -12,8 +12,8 @@
 	let show: any
 
 	async function getMovieDetails () {
-		let random: string = movies[Math.floor(Math.random()*movies.length)]
-			let data: any = await fetch(`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json());
+		let random: number = movies[Math.floor(Math.random()*movies.length)]
+		let data: any = await fetch(`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json());
 		movie = {...data}
 	};
 	
@@ -24,26 +24,45 @@
 	}
 
 	async function getShowDetails () {
-		let random: string = shows[Math.floor(Math.random() * shows.length)]
+		let random: number = shows[Math.floor(Math.random() * shows.length)]
 		let data: any = await fetch(`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json())
 		show = {...data}
+	}
+
+	async function getAnimatedMovieDetails() {
+		let random: number = animatedMovies[Math.floor(Math.random() * shows.length)]
+		let data: any = await fetch(`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json())
+		animatedMovie = {...data}
+	}
+
+	async function getAnimeDetails() {
+		let random: number = animes[Math.floor(Math.random() * animes.length)]
+		let data: any = await fetch(`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}`).then((x) => x.json())
+		anime = {...data}
 	}
 
 	let currentSelected: string;
 
 	const getDetails = () => {
+
 		movie = 0
 		show = 0
 		animatedMovie = 0
 		game = 0
 		anime = 0
+		
 		if (currentSelected == 'movies') {
 			getMovieDetails()
 		} else if (currentSelected == 'games') {
 			getGameDetails()
 		} else if (currentSelected == 'shows') {
 			getShowDetails()
-		} else {
+		} else if (currentSelected == 'animatedMovies') {
+			getAnimatedMovieDetails()
+		} else if (currentSelected == 'anime') {
+			getAnimeDetails()
+		}
+		else {
 			getMovieDetails()
 		}
 	}
@@ -68,7 +87,7 @@
 	{#if show}
 	<div>
 	
-		<h1>{show.title}</h1>
+		<h1>{show.name}</h1>
 		<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
 
 	</div>
@@ -83,12 +102,30 @@
 		</div>
 	{/if}
 
+	{#if animatedMovie}
+		<div>
+
+			<h1>{animatedMovie.title}</h1>
+			<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}" alt="{animatedMovie.Title} Poster">
+
+		</div>
+	{/if}
+
+	{#if anime}
+		<div>
+
+			<h1>{anime.name}</h1>
+			<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{anime.poster_path}" alt="{anime.Title} Poster">
+
+		</div>
+	{/if}
+
 	<button on:click={getDetails}>Entertain Me Aman</button>
 
 	<div class="">
 		<button on:click={() => {currentSelected = 'movies'}}>Movies</button>
 		<button on:click={() => {currentSelected = 'shows'}}>Shows</button>
-		<button on:click={() => {currentSelected = 'amovies'}}>Animated Movies</button>
+		<button on:click={() => {currentSelected = 'animatedMovies'}}>Animated Movies</button>
 		<button on:click={() => {currentSelected = 'anime'}}>Anime</button>
 		<button on:click={() => {currentSelected = 'games'}}>Games</button>
 	</div>
