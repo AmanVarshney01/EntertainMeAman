@@ -72,59 +72,46 @@
 </script>
 
 
-<div class="h-screen w-full flex flex-col justify-center items-center">
+<div class="h-screen w-full grid grid-cols-2 grid-rows-4">
 
-	<div class=" px-64 py-40 h-2/3 w-auto bg-slate-50 relative">
-		{#if movie}
-			<div class="absolute">
+	{#if movie}
+	
+		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{movie.poster_path}" alt="{movie.Title} Poster">
+		<h1 class=" col-start-2 col-end-3 row-span-1">{movie.title}</h1>
+		<div class=" col-start-2 col-end-3 row-span-2"></div>
+
+	{:else if show}
 		
-				<h1>{movie.title}</h1>
-				<img src="https://image.tmdb.org/t/p/w342/{movie.poster_path}" alt="{movie.Title} Poster">
+		<h1 class=" col-start-2 col-end-3 row-span-1">{show.name}</h1>
+		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
+		<div class=" col-start-2 col-end-3 row-span-2"></div>
 
+	{:else if game}
 
-			</div>
+		<h1 class=" col-start-2 col-end-3 row-span-1">{game.name}</h1>
+		<img class=" col-span-1 row-start-1 row-end-3 w-96" src="{game.background_image}" alt="">
+		<div class=" col-start-2 col-end-3 row-span-2"></div>
 
-		{:else if show}
-			<div class="absolute">
+	{:else if animatedMovie}
+	
+		<h1 class=" col-start-2 col-end-3 row-span-1">{animatedMovie.title}</h1>
+		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}" alt="{animatedMovie.Title} Poster">
+		<div class=" col-start-2 col-end-3 row-span-2"></div>
 		
-				<h1>{show.name}</h1>
-				<img src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
+	{:else if anime}
 
-			</div>
+		<h1 class=" col-start-2 col-end-3 row-span-1">{anime.name}</h1>
+		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{anime.poster_path}" alt="{anime.Title} Poster">
+		<div class=" col-start-2 col-end-3 row-span-2"></div>
 
-		{:else if game}
-			<div class="absolute">
+	{:else}
+		<div class=" bg-slate-400 col-start-1 col-end-3 row-start-1 row-end-3">
+		</div>
+	{/if}
 
-				{game.name}
-				<img class="w-96" src="{game.background_image}" alt="">
+	<button class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl row-span-3 col-start-1 col-end-3" on:click={getDetails}>Entertain Me Aman</button>
 
-			</div>
-
-		{:else if animatedMovie}
-			<div class="absolute">
-
-				<h1>{animatedMovie.title}</h1>
-				<img src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}" alt="{animatedMovie.Title} Poster">
-
-			</div>
-
-		{:else if anime}
-			<div class="absolute">
-
-				<h1>{anime.name}</h1>
-				<img src="https://image.tmdb.org/t/p/w342/{anime.poster_path}" alt="{anime.Title} Poster">
-
-			</div>
-		{:else}
-			<div class="absolute">
-
-			</div>
-		{/if}
-	</div>
-
-	<button class="font-bold text-sky-700 bg-slate-200 px-7 py-3 text-4xl rounded-2xl" on:click={getDetails}>Entertain Me Aman</button>
-
-	<div>
+	<div class=" col-start-1 col-end-3 row-span-4">
 		<button class="font-bold rounded bg-cyan-900 text-white px-4 py-2" on:click={() => {currentSelected = 'movies'}}>Movies</button>
 		<button class="font-bold rounded bg-lime-900 text-white px-4 py-2" on:click={() => {currentSelected = 'shows'}}>Shows</button>
 		<button class="font-bold rounded bg-orange-900 text-white px-4 py-2" on:click={() => {currentSelected = 'animatedMovies'}}>Animated Movies</button>
