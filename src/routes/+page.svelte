@@ -72,64 +72,68 @@
 </script>
 
 
-<div class="min-h-screen flex flex-col justify-center items-center">
+<div class="h-screen w-full flex flex-col justify-center items-center">
 
-	{#if movie}
-	<div>
-	
-		<h1>{movie.title}</h1>
-		<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{movie.poster_path}" alt="{movie.Title} Poster">
+	<div class=" px-64 py-40 h-2/3 w-auto bg-slate-50 relative">
+		{#if movie}
+			<div class="absolute">
+		
+				<h1>{movie.title}</h1>
+				<img src="https://image.tmdb.org/t/p/w342/{movie.poster_path}" alt="{movie.Title} Poster">
 
 
+			</div>
+
+		{:else if show}
+			<div class="absolute">
+		
+				<h1>{show.name}</h1>
+				<img src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
+
+			</div>
+
+		{:else if game}
+			<div class="absolute">
+
+				{game.name}
+				<img class="w-96" src="{game.background_image}" alt="">
+
+			</div>
+
+		{:else if animatedMovie}
+			<div class="absolute">
+
+				<h1>{animatedMovie.title}</h1>
+				<img src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}" alt="{animatedMovie.Title} Poster">
+
+			</div>
+
+		{:else if anime}
+			<div class="absolute">
+
+				<h1>{anime.name}</h1>
+				<img src="https://image.tmdb.org/t/p/w342/{anime.poster_path}" alt="{anime.Title} Poster">
+
+			</div>
+		{:else}
+			<div class="absolute">
+
+			</div>
+		{/if}
 	</div>
-	{/if}
 
-	{#if show}
+	<button class="font-bold text-sky-700 bg-slate-200 px-7 py-3 text-4xl rounded-2xl" on:click={getDetails}>Entertain Me Aman</button>
+
 	<div>
-	
-		<h1>{show.name}</h1>
-		<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
-
-	</div>
-	{/if}
-
-	{#if game}
-		<div>
-
-			{game.name}
-			<img class="w-96" src="{game.background_image}" alt="">
-
-		</div>
-	{/if}
-
-	{#if animatedMovie}
-		<div>
-
-			<h1>{animatedMovie.title}</h1>
-			<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}" alt="{animatedMovie.Title} Poster">
-
-		</div>
-	{/if}
-
-	{#if anime}
-		<div>
-
-			<h1>{anime.name}</h1>
-			<img class="w-auto h-3/5" src="https://image.tmdb.org/t/p/w342/{anime.poster_path}" alt="{anime.Title} Poster">
-
-		</div>
-	{/if}
-
-	<button on:click={getDetails}>Entertain Me Aman</button>
-
-	<div class="">
-		<button on:click={() => {currentSelected = 'movies'}}>Movies</button>
-		<button on:click={() => {currentSelected = 'shows'}}>Shows</button>
-		<button on:click={() => {currentSelected = 'animatedMovies'}}>Animated Movies</button>
-		<button on:click={() => {currentSelected = 'anime'}}>Anime</button>
-		<button on:click={() => {currentSelected = 'games'}}>Games</button>
+		<button class="font-bold rounded bg-cyan-900 text-white px-4 py-2" on:click={() => {currentSelected = 'movies'}}>Movies</button>
+		<button class="font-bold rounded bg-lime-900 text-white px-4 py-2" on:click={() => {currentSelected = 'shows'}}>Shows</button>
+		<button class="font-bold rounded bg-orange-900 text-white px-4 py-2" on:click={() => {currentSelected = 'animatedMovies'}}>Animated Movies</button>
+		<button class="font-bold rounded bg-emerald-900 text-white px-4 py-2" on:click={() => {currentSelected = 'anime'}}>Anime</button>
+		<button class="font-bold rounded bg-rose-900 text-white px-4 py-2" on:click={() => {currentSelected = 'games'}}>Games</button>
 	</div>
 
 </div>
 
-  
+  <style>
+
+  </style>
