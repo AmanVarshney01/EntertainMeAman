@@ -72,20 +72,22 @@
 </script>
 
 
-<div class="h-screen w-full grid grid-cols-2 grid-rows-4">
+<div class="h-screen w-full grid grid-cols-2 grid-rows-3 grid-flow-col-dense">
 
 	{#if movie}
 	
-		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{movie.poster_path}" alt="{movie.Title} Poster">
-		<h1 class=" col-start-2 col-end-3 row-span-1">{movie.title}</h1>
-		<div class=" col-start-2 col-end-3 row-span-2"></div>
+		<div class=" col-start-1 col-end-2 row-start-1 row-end-2 "><img class=" rounded-lg" src="https://image.tmdb.org/t/p/w342/{movie.poster_path}" alt="{movie.Title} Poster"></div>
+		<div class=" col-start-2 col-end-3">
+			<h1 class=" ">{movie.title}</h1>
+			<div class=" "></div>
+		</div>
+		
 
 	{:else if show}
 		
 		<h1 class=" col-start-2 col-end-3 row-span-1">{show.name}</h1>
-		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
 		<div class=" col-start-2 col-end-3 row-span-2"></div>
-
+		<img class=" col-span-1 row-start-1 row-end-3" src="https://image.tmdb.org/t/p/w342/{show.poster_path}" alt="{show.Title} Poster">
 	{:else if game}
 
 		<h1 class=" col-start-2 col-end-3 row-span-1">{game.name}</h1>
@@ -109,9 +111,9 @@
 		</div>
 	{/if}
 
-	<button class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl row-span-3 col-start-1 col-end-3" on:click={getDetails}>Entertain Me Aman</button>
+	<button class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl row-start-2 row-end-3 col-start-1 col-end-3" on:click={getDetails}>Entertain Me Aman</button>
 
-	<div class=" col-start-1 col-end-3 row-span-4">
+	<div class=" col-start-1 col-end-3 row-start-3 row-end-4 ">
 		<button class="font-bold rounded bg-cyan-900 text-white px-4 py-2" on:click={() => {currentSelected = 'movies'}}>Movies</button>
 		<button class="font-bold rounded bg-lime-900 text-white px-4 py-2" on:click={() => {currentSelected = 'shows'}}>Shows</button>
 		<button class="font-bold rounded bg-orange-900 text-white px-4 py-2" on:click={() => {currentSelected = 'animatedMovies'}}>Animated Movies</button>
@@ -121,6 +123,10 @@
 
 </div>
 
-  <style>
-
-  </style>
+  <!-- <style>
+	img {
+    width: 100%;
+    height: 100%!important;
+    object-fit: cover;
+}
+  </style> -->
