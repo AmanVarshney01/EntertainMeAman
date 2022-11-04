@@ -79,54 +79,66 @@
 
 <div class="h-screen w-full flex flex-col">
 	{#if movie}
-	<div class=" flex flex-row w-3/4 mx-auto ">
+		<div class=" flex flex-row w-3/4 mx-auto grow">
+			<div>
+				<img
+					class=" rounded-lg"
+					src="https://image.tmdb.org/t/p/w342/{movie.poster_path}"
+					alt="{movie.Title} Poster"
+				/>
+			</div>
+			<div class=" flex flex-col">
+				<h1 class=" font-bold font-mono">{movie.title}</h1>
+				<div class=" ">{movie.overview}</div>
+			</div>
+		</div>
+	{:else if show}
 		<div>
 			<img
-				class=" rounded-lg"
-				src="https://image.tmdb.org/t/p/w342/{movie.poster_path}"
-				alt="{movie.Title} Poster"
+				class=""
+				src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
+				alt="{show.Title} Poster"
 			/>
 		</div>
 		<div class=" flex flex-col">
-			<h1 class=" font-bold font-mono">{movie.title}</h1>
-			<div class=" ">{movie.overview}</div>
+			<h1 class=" font-bold font-mono">{show.title}</h1>
+			<div class=" ">{show.overview}</div>
 		</div>
-	</div>
-		
-	{:else if show}
-		<h1 class="">{show.name}</h1>
-		<div class="" />
-		<img
-			class=""
-			src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
-			alt="{show.Title} Poster"
-		/>
 	{:else if game}
 		<h1 class="">{game.name}</h1>
 		<img class="  w-96" src={game.background_image} alt="" />
 		<div class="" />
 	{:else if animatedMovie}
-		<h1 class=" ">{animatedMovie.title}</h1>
-		<img
-			class=" "
-			src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}"
-			alt="{animatedMovie.Title} Poster"
-		/>
-		<div class="" />
+		<div>
+			<img
+				class=" "
+				src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}"
+				alt="{animatedMovie.Title} Poster"
+			/>
+		</div>
+		<div class=" flex flex-col">
+			<h1 class=" font-bold font-mono">{animatedMovie.title}</h1>
+			<div class=" ">{animatedMovie.overview}</div>
+		</div>
 	{:else if anime}
-		<h1 class=" ">{anime.name}</h1>
-		<img
-			class=" "
-			src="https://image.tmdb.org/t/p/w342/{anime.poster_path}"
-			alt="{anime.Title} Poster"
-		/>
-		<div class="" />
+		<div>
+			<img
+				class=" "
+				src="https://image.tmdb.org/t/p/w342/{anime.poster_path}"
+				alt="{anime.Title} Poster"
+			/>
+		</div>
+		<div class=" flex flex-col">
+			<h1 class=" font-bold font-mono">{animatedMovie.title}</h1>
+			<div class=" ">{animatedMovie.overview}</div>
+		</div>
 	{:else}
 		<div class=" bg-slate-400" />
 	{/if}
 
-	<button class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl" on:click={getDetails}
-		>Entertain Me Aman</button
+	<button
+		class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl grow-0"
+		on:click={getDetails}>Entertain Me Aman</button
 	>
 
 	<div class=" flex flex-row gap-2 justify-center grow-0">
@@ -158,15 +170,8 @@
 			class="font-bold rounded bg-rose-900 text-white px-4 py-2"
 			on:click={() => {
 				currentSelected = 'games';
-			}}>Games
+			}}
+			>Games
 		</button>
 	</div>
 </div>
-
-<!-- <style>
-	img {
-    width: 100%;
-    height: 100%!important;
-    object-fit: cover;
-}
-  </style> -->
