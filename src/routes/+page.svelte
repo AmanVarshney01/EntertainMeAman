@@ -79,7 +79,7 @@
 
 <div class="h-screen w-full flex flex-col">
 	{#if movie}
-		<div class=" flex flex-row w-3/4 mx-auto grow">
+		<div class=" flex flex-row mx-auto grow-0 h-auto w-1/2">
 			<div>
 				<img
 					class=" rounded-lg"
@@ -87,50 +87,56 @@
 					alt="{movie.Title} Poster"
 				/>
 			</div>
-			<div class=" flex flex-col">
+			<div class=" flex flex-col w-2/3">
 				<h1 class=" font-bold font-mono">{movie.title}</h1>
 				<div class=" ">{movie.overview}</div>
 			</div>
 		</div>
 	{:else if show}
-		<div>
-			<img
-				class=""
-				src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
-				alt="{show.Title} Poster"
-			/>
-		</div>
-		<div class=" flex flex-col">
-			<h1 class=" font-bold font-mono">{show.title}</h1>
-			<div class=" ">{show.overview}</div>
+		<div class=" flex flex-row w-3/4 mx-auto grow">
+			<div>
+				<img
+					class=""
+					src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
+					alt="{show.name} Poster"
+				/>
+			</div>
+			<div class=" flex flex-col">
+				<h1 class=" font-bold font-mono">{show.name}</h1>
+				<div class=" ">{show.overview}</div>
+			</div>
 		</div>
 	{:else if game}
 		<h1 class="">{game.name}</h1>
 		<img class="  w-96" src={game.background_image} alt="" />
 		<div class="" />
 	{:else if animatedMovie}
-		<div>
-			<img
-				class=" "
-				src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}"
-				alt="{animatedMovie.Title} Poster"
-			/>
-		</div>
-		<div class=" flex flex-col">
-			<h1 class=" font-bold font-mono">{animatedMovie.title}</h1>
-			<div class=" ">{animatedMovie.overview}</div>
+		<div class=" flex flex-row w-3/4 mx-auto grow">
+			<div>
+				<img
+					class=" "
+					src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}"
+					alt="{animatedMovie.title} Poster"
+				/>
+			</div>
+			<div class=" flex flex-col">
+				<h1 class=" font-bold font-mono">{animatedMovie.title}</h1>
+				<div class=" ">{animatedMovie.overview}</div>
+			</div>
 		</div>
 	{:else if anime}
-		<div>
-			<img
-				class=" "
-				src="https://image.tmdb.org/t/p/w342/{anime.poster_path}"
-				alt="{anime.Title} Poster"
-			/>
-		</div>
-		<div class=" flex flex-col">
-			<h1 class=" font-bold font-mono">{animatedMovie.title}</h1>
-			<div class=" ">{animatedMovie.overview}</div>
+		<div class=" flex flex-row w-3/4 mx-auto grow">
+			<div>
+				<img
+					class=" "
+					src="https://image.tmdb.org/t/p/w342/{anime.poster_path}"
+					alt="{anime.name} Poster"
+				/>
+			</div>
+			<div class=" flex flex-col">
+				<h1 class=" font-bold font-mono">{anime.name}</h1>
+				<div class=" ">{anime.overview}</div>
+			</div>
 		</div>
 	{:else}
 		<div class=" bg-slate-400" />
