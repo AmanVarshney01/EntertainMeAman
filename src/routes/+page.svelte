@@ -77,7 +77,8 @@
 	// https://rawg.io/api/games/far-cry-3?key=cad2990e2205456cadc2e24ab207f45a
 </script>
 
-<div class="h-screen w-full flex flex-col">
+<div class=" h-screen w-full flex flex-col justify-center text-center">
+<div class=" flex flex-col w-3/4 mx-auto">
 	{#if movie}
 		<div class=" flex flex-row mx-auto grow-0 h-auto w-1/2">
 			<div>
@@ -93,7 +94,7 @@
 			</div>
 		</div>
 	{:else if show}
-		<div class=" flex flex-row w-3/4 mx-auto grow">
+		<div class=" flex flex-row mx-auto grow-0 h-auto w-1/2">
 			<div>
 				<img
 					class=""
@@ -101,7 +102,7 @@
 					alt="{show.name} Poster"
 				/>
 			</div>
-			<div class=" flex flex-col">
+			<div class=" flex flex-col w-2/3">
 				<h1 class=" font-bold font-mono">{show.name}</h1>
 				<div class=" ">{show.overview}</div>
 			</div>
@@ -111,7 +112,7 @@
 		<img class="  w-96" src={game.background_image} alt="" />
 		<div class="" />
 	{:else if animatedMovie}
-		<div class=" flex flex-row w-3/4 mx-auto grow">
+		<div class=" flex flex-row mx-auto grow-0 h-auto w-1/2">
 			<div>
 				<img
 					class=" "
@@ -119,13 +120,13 @@
 					alt="{animatedMovie.title} Poster"
 				/>
 			</div>
-			<div class=" flex flex-col">
+			<div class=" flex flex-col w-2/3">
 				<h1 class=" font-bold font-mono">{animatedMovie.title}</h1>
 				<div class=" ">{animatedMovie.overview}</div>
 			</div>
 		</div>
 	{:else if anime}
-		<div class=" flex flex-row w-3/4 mx-auto grow">
+		<div class=" flex flex-row mx-auto grow-0 h-auto w-1/2">
 			<div>
 				<img
 					class=" "
@@ -133,7 +134,7 @@
 					alt="{anime.name} Poster"
 				/>
 			</div>
-			<div class=" flex flex-col">
+			<div class=" flex flex-col w-2/3">
 				<h1 class=" font-bold font-mono">{anime.name}</h1>
 				<div class=" ">{anime.overview}</div>
 			</div>
@@ -180,4 +181,5 @@
 			>Games
 		</button>
 	</div>
+</div>
 </div>
