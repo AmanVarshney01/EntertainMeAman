@@ -79,6 +79,14 @@
 		return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
 	};
 
+	const getFullLangName = (current: any ) => {
+		if (current.original_language == 'hi') {
+			return "Hindi"
+		} else if (current.original_language == 'en') {
+			return "English"
+		}
+	}
+
 	// https://rawg.io/api/games/far-cry-3?key=cad2990e2205456cadc2e24ab207f45a
 </script>
 
@@ -94,21 +102,25 @@
 						alt="{movie.Title} Poster"
 					/>
 				</div>
-				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10">
-					<h1 class=" font-bold font-mono text-3xl">{movie.title}</h1>
-					<p class=" text-left text-lg">{movie.overview.substring(0, 200)}...</p>
+				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6">
+					<h1 class=" font-bold font-mono text-3xl my-4">{movie.title}</h1>
 					<div class="flex flex-row justify-around mx-5 text-center">
+						<span>{movie.genres[0].name}</span>
+						<span>{getFullLangName(movie)}</span>
 						<span>{getFormattedDate(movie.release_date)}</span>
 						<span>{movie.runtime} mins</span>
+					</div>
+					<p class=" text-left text-lg my-4">{movie.overview.substring(0, 200)}...</p>
+					<div class=" flex flex-row gap-x-10">
 						<a
 							href="https://www.imdb.com/title/{movie.imdb_id}/"
 							target="_blank"
-							rel="noopener noreferrer"><img class=" w-14 h-auto" src="/imdblogo.svg" alt="" /></a
+							rel="noopener noreferrer"><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
 						>
 						<a
 							href="https://www.google.com/search?q={movie.title.replace(' ', '+')}"
 							target="_blank"
-							rel="noopener noreferrer"><img class=" w-20 h-auto" src="/googlelogo.svg" alt="" /></a
+							rel="noopener noreferrer"><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
 						>
 					</div>
 				</div>
@@ -164,7 +176,7 @@
 		{/if}
 
 		<button
-			class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl grow-0"
+			class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl grow-0 p-4"
 			on:click={getDetails}>Entertain Me Aman</button
 		>
 
