@@ -29,7 +29,7 @@
 	async function getShowDetails() {
 		let random: number = shows[Math.floor(Math.random() * shows.length)];
 		let data: any = await fetch(
-			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}`
+			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		show = { ...data };
 	}
@@ -61,10 +61,10 @@
 
 		if (currentSelected == 'movies') {
 			getMovieDetails();
-		} 
+		}
 		// else if (currentSelected == 'games') {
 		// 	getGameDetails();
-		// } 
+		// }
 		else if (currentSelected == 'shows') {
 			getShowDetails();
 		} else if (currentSelected == 'animatedMovies') {
@@ -92,12 +92,12 @@
 					<img
 						class=" rounded-lg"
 						src="https://image.tmdb.org/t/p/w342/{movie.poster_path}"
-						alt="{movie.Title} Poster"
+						alt="{movie.title} Poster"
 					/>
 				</div>
 				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6">
 					<h1 class=" font-bold font-mono text-3xl my-4">{movie.title}</h1>
-					<div class="flex flex-row justify-around mx-5 text-center my-1">
+					<div class="flex flex-row justify-around mx-5 text-center my-1 gap-5">
 						<span>{movie.genres[0].name}</span>
 						<span>{movie.spoken_languages[0].english_name}</span>
 						<span>{getFormattedDate(movie.release_date)}</span>
@@ -133,20 +133,52 @@
 				</div>
 			</div>
 		{:else if show}
-			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-1/2">
+			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
 				<div>
 					<img
-						class=""
+						class=" rounded-lg"
 						src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
 						alt="{show.name} Poster"
 					/>
 				</div>
-				<div class=" flex flex-col w-2/3">
-					<h1 class=" font-bold font-mono">{show.name}</h1>
-					<div class=" ">{show.overview}</div>
+				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6">
+					<h1 class=" font-bold font-mono text-3xl my-4">{show.name}</h1>
+					<div class="flex flex-row justify-around mx-5 text-center my-1 gap-5">
+						<span>{show.genres[0].name}</span>
+						<span>{show.spoken_languages[0].english_name}</span>
+						<span>{getFormattedDate(show.first_air_date)}</span>
+						<span>S: {show.number_of_seasons} Ep: {show.number_of_episodes}</span>
+					</div>
+					<p class=" text-left text-lg my-8">{show.overview.substring(0, 200)}...</p>
+					<div class=" flex flex-row gap-x-10 my-4">
+						<a
+							href="https://www.imdb.com/title/{show.external_ids.imdb_id}/"
+							target="_blank"
+							rel="noopener noreferrer"
+							><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
+						>
+						<a
+							href="https://www.google.com/search?q={show.name.replace(' ', '+')}"
+							target="_blank"
+							rel="noopener noreferrer"
+							><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
+						>
+						<a
+							href="https://www.rottentomatoes.com/tv/{show.name.replace(' ', '_')}"
+							target="_blank"
+							rel="noopener noreferrer"
+							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
+						>
+						<a
+							href="https://www.metacritic.com/tv/{show.name.replace(' ', '-').toLowerCase()}"
+							target="_blank"
+							rel="noopener noreferrer"
+							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
+						>
+					</div>
 				</div>
 			</div>
-		<!-- {:else if game}
+			<!-- {:else if game}
 			<h1 class="">{game.name}</h1>
 			<img class="  w-96" src={game.background_image} alt="" />
 			<div class="" /> -->
@@ -182,9 +214,8 @@
 			<div class=" bg-slate-400" />
 		{/if}
 
-		<button
-			class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5"
-			on:click={getDetails}>Entertain Me Aman</button
+		<button class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5" on:click={getDetails}
+			>Entertain Me Aman</button
 		>
 
 		<div class=" flex flex-row gap-2 justify-center grow-0">
