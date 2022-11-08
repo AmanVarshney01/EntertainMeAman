@@ -6,3 +6,6 @@ module.exports = {
   },
   plugins: [],
 }
+
+// fontFamily: {
+      //   headingfont: ['headingfont']

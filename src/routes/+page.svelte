@@ -18,13 +18,13 @@
 		movie = { ...data };
 	}
 
-	async function getGameDetails() {
-		let random: string = games[Math.floor(Math.random() * games.length)];
-		let data: any = await fetch(`https://rawg.io/api/games/${random}?key=${apiKeyRawg}`).then((x) =>
-			x.json()
-		);
-		game = { ...data };
-	}
+	// async function getGameDetails() {
+	// 	let random: string = games[Math.floor(Math.random() * games.length)];
+	// 	let data: any = await fetch(`https://rawg.io/api/games/${random}?key=${apiKeyRawg}`).then((x) =>
+	// 		x.json()
+	// 	);
+	// 	game = { ...data };
+	// }
 
 	async function getShowDetails() {
 		let random: number = shows[Math.floor(Math.random() * shows.length)];
@@ -61,9 +61,11 @@
 
 		if (currentSelected == 'movies') {
 			getMovieDetails();
-		} else if (currentSelected == 'games') {
-			getGameDetails();
-		} else if (currentSelected == 'shows') {
+		} 
+		// else if (currentSelected == 'games') {
+		// 	getGameDetails();
+		// } 
+		else if (currentSelected == 'shows') {
 			getShowDetails();
 		} else if (currentSelected == 'animatedMovies') {
 			getAnimatedMovieDetails();
@@ -144,10 +146,10 @@
 					<div class=" ">{show.overview}</div>
 				</div>
 			</div>
-		{:else if game}
+		<!-- {:else if game}
 			<h1 class="">{game.name}</h1>
 			<img class="  w-96" src={game.background_image} alt="" />
-			<div class="" />
+			<div class="" /> -->
 		{:else if animatedMovie}
 			<div class=" flex flex-row mx-auto grow-0 h-auto w-1/2">
 				<div>
@@ -181,7 +183,7 @@
 		{/if}
 
 		<button
-			class="font-bold text-sky-700 bg-slate-200 text-4xl rounded-2xl grow-0 p-4"
+			class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5"
 			on:click={getDetails}>Entertain Me Aman</button
 		>
 
@@ -210,13 +212,13 @@
 					currentSelected = 'anime';
 				}}>Anime</button
 			>
-			<button
+			<!-- <button
 				class="font-bold rounded bg-rose-900 text-white px-4 py-2"
 				on:click={() => {
 					currentSelected = 'games';
 				}}
 				>Games
-			</button>
+			</button> -->
 		</div>
 	</div>
 </div>
