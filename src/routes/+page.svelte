@@ -82,7 +82,6 @@
 	// https://rawg.io/api/games/far-cry-3?key=cad2990e2205456cadc2e24ab207f45a
 </script>
 
-
 <div class=" h-screen w-full flex flex-col justify-center text-center bg-black">
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
@@ -107,12 +106,26 @@
 						<a
 							href="https://www.imdb.com/title/{movie.imdb_id}/"
 							target="_blank"
-							rel="noopener noreferrer"><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
+							rel="noopener noreferrer"
+							><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
 						>
 						<a
 							href="https://www.google.com/search?q={movie.title.replace(' ', '+')}"
 							target="_blank"
-							rel="noopener noreferrer"><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
+							rel="noopener noreferrer"
+							><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
+						>
+						<a
+							href="https://www.rottentomatoes.com/m/{movie.title.replace(' ', '_')}"
+							target="_blank"
+							rel="noopener noreferrer"
+							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
+						>
+						<a
+							href="https://www.metacritic.com/movie/{movie.title.replace(' ', '-').toLowerCase()}"
+							target="_blank"
+							rel="noopener noreferrer"
+							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
 						>
 					</div>
 				</div>
