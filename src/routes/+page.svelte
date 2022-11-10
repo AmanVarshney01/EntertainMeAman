@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { fade, fly } from 'svelte/transition';
 	import { movies, shows, animatedMovies, games, animes } from '../data.json';
+	import { backOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
 
 	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
+
+	let initialAnimate = false;
+
+	onMount(() => (initialAnimate = true));
 
 	let movie: any;
 	let game: any;
@@ -195,15 +202,17 @@
 			<div class="" /> -->
 		{:else if animatedMovie}
 			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div>
+				<div class=" shadow-lg">
 					<img
 						class=" rounded-lg"
 						src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}"
 						alt="{animatedMovie.title} Poster"
 					/>
 				</div>
-				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6">
-					<h1 class=" font-bold font-mono text-3xl my-4">{animatedMovie.title}</h1>
+				<div
+					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
+				>
+					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{animatedMovie.title}</h1>
 					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
 						<span>{animatedMovie.genres[0].name}</span>
 						<span>{animatedMovie.spoken_languages[0].english_name}</span>
@@ -213,6 +222,7 @@
 					<p class=" text-left text-lg my-8">{animatedMovie.overview.substring(0, 200)}...</p>
 					<div class=" flex flex-row gap-x-10 my-4">
 						<a
+							class=" hover:border-b-2 border-cyan-700"
 							href="https://www.imdb.com/title/{animatedMovie.imdb_id}/"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -241,15 +251,17 @@
 			</div>
 		{:else if anime}
 			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div>
+				<div class=" shadow-lg">
 					<img
 						class=" rounded-lg"
 						src="https://image.tmdb.org/t/p/w342/{anime.poster_path}"
 						alt="{anime.name} Poster"
 					/>
 				</div>
-				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6">
-					<h1 class=" font-bold font-mono text-3xl my-4">{anime.name}</h1>
+				<div
+					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
+				>
+					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{anime.name}</h1>
 					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
 						<span>{anime.genres[0].name}</span>
 						<span>{anime.spoken_languages[0].english_name}</span>
@@ -289,44 +301,85 @@
 			<div class="" />
 		{/if}
 
-		<div class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5">
-			<button on:click={getDetails} class=" cursor-pointer">Entertain Me Aman</button>
-		</div>
-
-		<div class="flex flex-row gap-2 justify-center grow-0">
-			<div id="button1" class=" hover:scale-105 delay-75 transition p-0.5">
-				<button
-					class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
-					on:click={() => {
-						currentSelected = 'movies';
-					}}>Movies</button
-				>
+		{#if initialAnimate}
+			<div class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5">
+				<button on:click={getDetails} class=" cursor-pointer">Entertain Me Aman</button>
 			</div>
-			<button
-				class="font-bold rounded bg-lime-900 text-white px-4 py-2 cursor-pointer"
-				on:click={() => {
-					currentSelected = 'shows';
-				}}>Shows</button
-			>
-			<button
-				class="font-bold rounded bg-orange-900 text-white px-4 py-2 cursor-pointer"
-				on:click={() => {
-					currentSelected = 'animatedMovies';
-				}}>Animated Movies</button
-			>
-			<button
-				class="font-bold rounded bg-emerald-900 text-white px-4 py-2 cursor-pointer"
-				on:click={() => {
-					currentSelected = 'anime';
-				}}>Anime</button
-			>
-			<!-- <button
+
+			<div class="flex flex-row gap-2 justify-center grow-0">
+				<div
+					transition:fly={{
+						y: 50,
+						delay: 300,
+						easing: backOut
+					}}
+					id="button1"
+					class=" hover:scale-105 delay-75 transition p-0.5"
+				>
+					<button
+						class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
+						on:click={() => {
+							currentSelected = 'movies';
+						}}>Movies</button
+					>
+				</div>
+				<div
+					transition:fly={{
+						y: 50,
+						delay: 400,
+						easing: backOut
+					}}
+					id="button1"
+					class=" hover:scale-105 delay-75 transition p-0.5"
+				>
+					<button
+						class="font-bold rounded bg-lime-900 text-white px-4 py-2 cursor-pointer"
+						on:click={() => {
+							currentSelected = 'shows';
+						}}>Shows</button
+					>
+				</div>
+				<div
+					transition:fly={{
+						y: 50,
+						delay: 500,
+						easing: backOut
+					}}
+					id="button1"
+					class=" hover:scale-105 delay-75 transition p-0.5"
+				>
+					<button
+						class="font-bold rounded bg-orange-900 text-white px-4 py-2 cursor-pointer"
+						on:click={() => {
+							currentSelected = 'animatedMovies';
+						}}>Animated Movies</button
+					>
+				</div>
+				<div
+					transition:fly={{
+						y: 50,
+						delay: 600,
+						easing: backOut
+					}}
+					id="button1"
+					class=" hover:scale-105 delay-75 transition p-0.5"
+				>
+					<button
+						class="font-bold rounded bg-emerald-900 text-white px-4 py-2 cursor-pointer"
+						on:click={() => {
+							currentSelected = 'anime';
+						}}>Anime</button
+					>
+				</div>
+
+				<!-- <button
 				class="font-bold rounded bg-rose-900 text-white px-4 py-2"
 				on:click={() => {
 					currentSelected = 'games';
 				}}
 				>Games
 			</button> -->
-		</div>
+			</div>
+		{/if}
 	</div>
 </div>
