@@ -2,63 +2,61 @@
 	import { movies, shows, animatedMovies, games, animes } from '../data.json';
 
 	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
-	const apiKeyRawg = 'cad2990e2205456cadc2e24ab207f45a';
-	// let data: any;
+
 	let movie: any;
 	let game: any;
 	let anime: any;
 	let animatedMovie: any;
 	let show: any;
+	let element: any = 0;
+
+	let currentSelected: string;
 
 	async function getMovieDetails() {
-		let random: number = movies[Math.floor(Math.random() * movies.length)];
-		let data: any = await fetch(
+		const random: number = movies[Math.floor(Math.random() * movies.length)];
+		const data: any = await fetch(
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		movie = { ...data };
+		element = document.getElementById('button1');
+		element.style.border = '2.5px dashed #4BB543';
+		// element.style.boxShadow = '120px 80px 20px #0ff'
 	}
 
-	// async function getGameDetails() {
-	// 	let random: string = games[Math.floor(Math.random() * games.length)];
-	// 	let data: any = await fetch(`https://rawg.io/api/games/${random}?key=${apiKeyRawg}`).then((x) =>
-	// 		x.json()
-	// 	);
-	// 	game = { ...data };
-	// }
-
 	async function getShowDetails() {
-		let random: number = shows[Math.floor(Math.random() * shows.length)];
-		let data: any = await fetch(
+		const random: number = shows[Math.floor(Math.random() * shows.length)];
+		const data: any = await fetch(
 			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		show = { ...data };
 	}
 
 	async function getAnimatedMovieDetails() {
-		let random: number = animatedMovies[Math.floor(Math.random() * shows.length)];
-		let data: any = await fetch(
+		const random: number = animatedMovies[Math.floor(Math.random() * shows.length)];
+		const data: any = await fetch(
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		animatedMovie = { ...data };
 	}
 
 	async function getAnimeDetails() {
-		let random: number = animes[Math.floor(Math.random() * animes.length)];
-		let data: any = await fetch(
+		const random: number = animes[Math.floor(Math.random() * animes.length)];
+		const data: any = await fetch(
 			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		anime = { ...data };
 	}
 
-	let currentSelected: string;
-
-	const getDetails = () => {
+	const deleteData = () => {
 		movie = 0;
 		show = 0;
 		animatedMovie = 0;
 		game = 0;
 		anime = 0;
+		element.style.border = null;
+	};
 
+	const getDetails = () => {
 		if (currentSelected == 'movies') {
 			getMovieDetails();
 		}
@@ -74,6 +72,7 @@
 		} else {
 			getMovieDetails();
 		}
+		deleteData();
 	};
 
 	const getFormattedDate = (d: string) => {
@@ -114,7 +113,8 @@
 					</div>
 					<p class=" text-left text-lg my-8">{movie.overview.substring(0, 200)}...</p>
 					<div class=" flex flex-row gap-x-10 my-4">
-						<a class=" hover:border-b-2 border-cyan-700"
+						<a
+							class=" hover:border-b-2 border-cyan-700"
 							href="https://www.imdb.com/title/{movie.imdb_id}/"
 							target="_blank"
 							rel="noopener noreferrer"
@@ -143,15 +143,17 @@
 			</div>
 		{:else if show}
 			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div>
+				<div class=" shadow-lg">
 					<img
 						class=" rounded-lg"
 						src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
 						alt="{show.name} Poster"
 					/>
 				</div>
-				<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6">
-					<h1 class=" font-bold font-mono text-3xl my-4">{show.name}</h1>
+				<div
+					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
+				>
+					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{show.name}</h1>
 					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
 						<span>{show.genres[0].name}</span>
 						<span>{show.spoken_languages[0].english_name}</span>
@@ -274,30 +276,32 @@
 							rel="noopener noreferrer"
 							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
 						>
-						<!-- <a
-							href="https://www.metacritic.com/tv/{removeSpaces(anime.name, " ", "-")}"
+						<a
+							href="https://www.metacritic.com/tv/{removeSpaces(anime.name, ' ', '-')}"
 							target="_blank"
 							rel="noopener noreferrer"
 							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
-						> -->
+						>
 					</div>
 				</div>
 			</div>
 		{:else}
-			<div class=" bg-slate-400" />
+			<div class="" />
 		{/if}
 
 		<div class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5">
 			<button on:click={getDetails} class=" cursor-pointer">Entertain Me Aman</button>
 		</div>
 
-		<div class=" flex flex-row gap-2 justify-center grow-0">
-			<button
-				class="font-bold rounded bg-cyan-900 text-white px-4 py-2 hover:scale-105 delay-75 transition cursor-pointer"
-				on:click={() => {
-					currentSelected = 'movies';
-				}}>Movies</button
-			>
+		<div class="flex flex-row gap-2 justify-center grow-0">
+			<div id="button1" class=" hover:scale-105 delay-75 transition p-0.5">
+				<button
+					class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
+					on:click={() => {
+						currentSelected = 'movies';
+					}}>Movies</button
+				>
+			</div>
 			<button
 				class="font-bold rounded bg-lime-900 text-white px-4 py-2 cursor-pointer"
 				on:click={() => {
