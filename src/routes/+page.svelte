@@ -1,8 +1,10 @@
 <script lang="ts">
+	import MoviePanel from './Components/moviePanel.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { movies, shows, animatedMovies, games, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
+	import Layout from './+layout.svelte';
 
 	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
 
@@ -18,6 +20,8 @@
 	let element: any = 0;
 
 	let currentSelected: string;
+	let movieDetails: any;
+	let animatedMovieDetails: any;
 
 	async function getMovieDetails() {
 		const random: number = movies[Math.floor(Math.random() * movies.length)];
@@ -25,8 +29,21 @@
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		movie = { ...data };
+		movieDetails = {
+			title: movie.title,
+			poster_path: movie.poster_path,
+			genre: movie.genres[0].name,
+			language: movie.spoken_languages[0].english_name,
+			date: getFormattedDate(movie.release_date),
+			runtime: movie.runtime,
+			overview: movie.overview.substring(0, 200),
+			imdb_id: movie.imdb_id,
+			google_url: removeSpaces(movie.title, ' ', '+'),
+			rotten_tomatoes_url: removeSpaces(movie.title, ' ', '_'),
+			metacritic_url: removeSpaces(movie.title, ' ', '-')
+		};
 		element = document.getElementById('button1');
-		element.style.border = '2.5px dashed #4BB543';
+		element.style.border = '2.5px solid #4BB543';
 		// element.style.boxShadow = '120px 80px 20px #0ff'
 	}
 
@@ -44,6 +61,19 @@
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		animatedMovie = { ...data };
+		animatedMovieDetails = {
+			title: animatedMovie.title,
+			poster_path: animatedMovie.poster_path,
+			genre: animatedMovie.genres[0].name,
+			language: animatedMovie.spoken_languages[0].english_name,
+			date: getFormattedDate(animatedMovie.release_date),
+			runtime: animatedMovie.runtime,
+			overview: animatedMovie.overview.substring(0, 200),
+			imdb_id: animatedMovie.imdb_id,
+			google_url: removeSpaces(animatedMovie.title, ' ', '+'),
+			rotten_tomatoes_url: removeSpaces(animatedMovie.title, ' ', '_'),
+			metacritic_url: removeSpaces(animatedMovie.title, ' ', '-')
+		};
 	}
 
 	async function getAnimeDetails() {
@@ -100,54 +130,7 @@
 <div class=" h-screen w-full flex flex-col justify-center text-center bg-neutral-200">
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
-			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div class=" shadow-lg">
-					<img
-						class=" rounded-lg"
-						src="https://image.tmdb.org/t/p/w342/{movie.poster_path}"
-						alt="{movie.title} Poster"
-					/>
-				</div>
-				<div
-					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
-				>
-					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{movie.title}</h1>
-					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
-						<span>{movie.genres[0].name}</span>
-						<span>{movie.spoken_languages[0].english_name}</span>
-						<span>{getFormattedDate(movie.release_date)}</span>
-						<span>{movie.runtime} mins</span>
-					</div>
-					<p class=" text-left text-lg my-8">{movie.overview.substring(0, 200)}...</p>
-					<div class=" flex flex-row gap-x-10 my-4">
-						<a
-							class=" hover:border-b-2 border-cyan-700"
-							href="https://www.imdb.com/title/{movie.imdb_id}/"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
-						>
-						<a
-							href="https://www.google.com/search?q={removeSpaces(movie.title, ' ', '+')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
-						>
-						<a
-							href="https://www.rottentomatoes.com/m/{removeSpaces(movie.title, ' ', '_')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
-						>
-						<a
-							href="https://www.metacritic.com/movie/{removeSpaces(movie.title, ' ', '-')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
-						>
-					</div>
-				</div>
-			</div>
+			<MoviePanel {...movieDetails} />
 		{:else if show}
 			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
 				<div class=" shadow-lg">
@@ -201,54 +184,7 @@
 			<img class="  w-96" src={game.background_image} alt="" />
 			<div class="" /> -->
 		{:else if animatedMovie}
-			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div class=" shadow-lg">
-					<img
-						class=" rounded-lg"
-						src="https://image.tmdb.org/t/p/w342/{animatedMovie.poster_path}"
-						alt="{animatedMovie.title} Poster"
-					/>
-				</div>
-				<div
-					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
-				>
-					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{animatedMovie.title}</h1>
-					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
-						<span>{animatedMovie.genres[0].name}</span>
-						<span>{animatedMovie.spoken_languages[0].english_name}</span>
-						<span>{getFormattedDate(animatedMovie.release_date)}</span>
-						<span>{animatedMovie.runtime} mins</span>
-					</div>
-					<p class=" text-left text-lg my-8">{animatedMovie.overview.substring(0, 200)}...</p>
-					<div class=" flex flex-row gap-x-10 my-4">
-						<a
-							class=" hover:border-b-2 border-cyan-700"
-							href="https://www.imdb.com/title/{animatedMovie.imdb_id}/"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
-						>
-						<a
-							href="https://www.google.com/search?q={removeSpaces(animatedMovie.title, ' ', '+')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
-						>
-						<a
-							href="https://www.rottentomatoes.com/m/{removeSpaces(animatedMovie.title, ' ', '_')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
-						>
-						<a
-							href="https://www.metacritic.com/movie/{removeSpaces(animatedMovie.title, ' ', '-')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
-						>
-					</div>
-				</div>
-			</div>
+			<MoviePanel {...animatedMovieDetails}></MoviePanel>
 		{:else if anime}
 			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
 				<div class=" shadow-lg">
