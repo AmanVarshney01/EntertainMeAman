@@ -33,9 +33,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@tailwindcss/typography": "^0.5.7",
-		"@threlte/core": "^4.3.3",
-		"@threlte/extras": "^4.5.1",
-		"three": "^0.146.0"
+		"@tailwindcss/typography": "^0.5.7"
 	}
 }

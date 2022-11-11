@@ -6,7 +6,6 @@
     export let genre: string;
     export let language: string;
     export let date: string;
-    // export let runtime: string;
     export let no_of_seasons: string;
     export let no_of_episodes: string;
     export let imdb_id: string;

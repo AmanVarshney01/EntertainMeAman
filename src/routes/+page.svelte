@@ -1,11 +1,11 @@
 <script lang="ts">
 	import MoviePanel from './Components/moviePanel.svelte';
 	import TvPanel from './Components/tvPanel.svelte';
+	import { getFormattedDate, removeSpaces } from './utils';
 	import { fade, fly } from 'svelte/transition';
 	import { movies, shows, animatedMovies, games, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import Layout from './+layout.svelte';
 
 	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
 
@@ -127,11 +127,7 @@
 	const getDetails = () => {
 		if (currentSelected == 'movies') {
 			getMovieDetails();
-		}
-		// else if (currentSelected == 'games') {
-		// 	getGameDetails();
-		// }
-		else if (currentSelected == 'shows') {
+		} else if (currentSelected == 'shows') {
 			getShowDetails();
 		} else if (currentSelected == 'animatedMovies') {
 			getAnimatedMovieDetails();
@@ -142,20 +138,7 @@
 		}
 		deleteData();
 	};
-
-	const getFormattedDate = (d: string) => {
-		let date = new Date(d);
-		return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
-	};
-
-	const removeSpaces = (string: string, target: string, replacement: string) => {
-		for (let i = 0; i < string.length; i++) {
-			string = string.replace(target, replacement);
-		}
-		return string.toLowerCase();
-	};
-
-	// https://rawg.io/api/games/far-cry-3?key=cad2990e2205456cadc2e24ab207f45a
+	let value = 'Entertain Me Aman';
 </script>
 
 <div class=" h-screen w-full flex flex-col justify-center text-center bg-neutral-200">
@@ -167,7 +150,7 @@
 		{:else if animatedMovie}
 			<MoviePanel {...animatedMovieDetails} />
 		{:else if anime}
-			<TvPanel {...animeDetails}></TvPanel>
+			<TvPanel {...animeDetails} />
 		{:else}
 			<div class="" />
 		{/if}
