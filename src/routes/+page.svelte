@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MoviePanel from './Components/moviePanel.svelte';
+	import TvPanel from './Components/tvPanel.svelte';
 	import { fade, fly } from 'svelte/transition';
 	import { movies, shows, animatedMovies, games, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
@@ -22,6 +23,8 @@
 	let currentSelected: string;
 	let movieDetails: any;
 	let animatedMovieDetails: any;
+	let showDetails: any;
+	let animeDetails: any;
 
 	async function getMovieDetails() {
 		const random: number = movies[Math.floor(Math.random() * movies.length)];
@@ -53,6 +56,20 @@
 			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		show = { ...data };
+		showDetails = {
+			name: show.name,
+			poster_path: show.poster_path,
+			genre: show.genres[0].name,
+			language: show.spoken_languages[0].english_name,
+			date: getFormattedDate(show.first_air_date),
+			no_of_seasons: show.number_of_seasons,
+			no_of_episodes: show.number_of_episodes,
+			overview: show.overview.substring(0, 200),
+			imdb_id: show.external_ids.imdb_id,
+			google_url: removeSpaces(show.name, ' ', '+'),
+			rotten_tomatoes_url: removeSpaces(show.name, ' ', '_'),
+			metacritic_url: removeSpaces(show.name, ' ', '-')
+		};
 	}
 
 	async function getAnimatedMovieDetails() {
@@ -82,6 +99,20 @@
 			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		anime = { ...data };
+		animeDetails = {
+			name: anime.name,
+			poster_path: anime.poster_path,
+			genre: anime.genres[0].name,
+			language: anime.spoken_languages[0].english_name,
+			date: getFormattedDate(anime.first_air_date),
+			no_of_seasons: anime.number_of_seasons,
+			no_of_episodes: anime.number_of_episodes,
+			overview: anime.overview.substring(0, 200),
+			imdb_id: anime.external_ids.imdb_id,
+			google_url: removeSpaces(anime.name, ' ', '+'),
+			rotten_tomatoes_url: removeSpaces(anime.name, ' ', '_'),
+			metacritic_url: removeSpaces(anime.name, ' ', '-')
+		};
 	}
 
 	const deleteData = () => {
@@ -132,107 +163,11 @@
 		{#if movie}
 			<MoviePanel {...movieDetails} />
 		{:else if show}
-			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div class=" shadow-lg">
-					<img
-						class=" rounded-lg"
-						src="https://image.tmdb.org/t/p/w342/{show.poster_path}"
-						alt="{show.name} Poster"
-					/>
-				</div>
-				<div
-					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
-				>
-					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{show.name}</h1>
-					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
-						<span>{show.genres[0].name}</span>
-						<span>{show.spoken_languages[0].english_name}</span>
-						<span>{getFormattedDate(show.first_air_date)}</span>
-						<span>S: {show.number_of_seasons} Ep: {show.number_of_episodes}</span>
-					</div>
-					<p class=" text-left text-lg my-8">{show.overview.substring(0, 200)}...</p>
-					<div class=" flex flex-row gap-x-10 my-4">
-						<a
-							href="https://www.imdb.com/title/{show.external_ids.imdb_id}/"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
-						>
-						<a
-							href="https://www.google.com/search?q={removeSpaces(show.name, ' ', '+')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
-						>
-						<a
-							href="https://www.rottentomatoes.com/tv/{removeSpaces(show.name, ' ', '_')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
-						>
-						<a
-							href="https://www.metacritic.com/tv/{removeSpaces(show.name, ' ', '-')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
-						>
-					</div>
-				</div>
-			</div>
-			<!-- {:else if game}
-			<h1 class="">{game.name}</h1>
-			<img class="  w-96" src={game.background_image} alt="" />
-			<div class="" /> -->
+			<TvPanel {...showDetails} />
 		{:else if animatedMovie}
-			<MoviePanel {...animatedMovieDetails}></MoviePanel>
+			<MoviePanel {...animatedMovieDetails} />
 		{:else if anime}
-			<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-				<div class=" shadow-lg">
-					<img
-						class=" rounded-lg"
-						src="https://image.tmdb.org/t/p/w342/{anime.poster_path}"
-						alt="{anime.name} Poster"
-					/>
-				</div>
-				<div
-					class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
-				>
-					<h1 class=" font-bold font-mono text-3xl my-4 select-all">{anime.name}</h1>
-					<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
-						<span>{anime.genres[0].name}</span>
-						<span>{anime.spoken_languages[0].english_name}</span>
-						<span>{getFormattedDate(anime.first_air_date)}</span>
-						<span>S: {anime.number_of_seasons} Ep: {anime.number_of_episodes}</span>
-					</div>
-					<p class=" text-left text-lg my-8">{anime.overview.substring(0, 200)}...</p>
-					<div class=" flex flex-row gap-x-10 my-4">
-						<a
-							href="https://www.imdb.com/title/{anime.external_ids.imdb_id}/"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-14 h-auto" src="/imdblogo.svg" alt="IMDB" /></a
-						>
-						<a
-							href="https://www.google.com/search?q={removeSpaces(anime.name, ' ', '+')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-20 h-auto" src="/googlelogo.svg" alt="Google" /></a
-						>
-						<a
-							href="https://www.rottentomatoes.com/tv/{removeSpaces(anime.name, ' ', '_')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-24 h-auto" src="/Rotten_Tomatoes_logo.svg" alt="Rotten Tomatoes" /></a
-						>
-						<a
-							href="https://www.metacritic.com/tv/{removeSpaces(anime.name, ' ', '-')}"
-							target="_blank"
-							rel="noopener noreferrer"
-							><img class=" w-28 h-auto" src="/Metacritic_logo.svg" alt="Metacritic" /></a
-						>
-					</div>
-				</div>
-			</div>
+			<TvPanel {...animeDetails}></TvPanel>
 		{:else}
 			<div class="" />
 		{/if}
