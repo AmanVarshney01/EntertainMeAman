@@ -40,7 +40,7 @@
 			language: movie.spoken_languages[0].english_name,
 			date: getFormattedDate(movie.release_date),
 			runtime: movie.runtime,
-			overview: movie.overview.substring(0, 250),
+			overview: movie.overview.substring(0, 200),
 			imdb_id: movie.imdb_id,
 			google_url: removeSpaces(movie.title, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(movie.title, ' ', '_'),
@@ -67,7 +67,7 @@
 			date: getFormattedDate(show.first_air_date),
 			no_of_seasons: show.number_of_seasons,
 			no_of_episodes: show.number_of_episodes,
-			overview: show.overview.substring(0, 250),
+			overview: show.overview.substring(0, 200),
 			imdb_id: show.external_ids.imdb_id,
 			google_url: removeSpaces(show.name, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(show.name, ' ', '_'),
@@ -79,7 +79,7 @@
 	}
 
 	async function getAnimatedMovieDetails() {
-		const random: number = animatedMovies[Math.floor(Math.random() * shows.length)];
+		const random: number = animatedMovies[Math.floor(Math.random() * animatedMovies.length)];
 		const data: any = await fetch(
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
@@ -91,7 +91,7 @@
 			language: animatedMovie.spoken_languages[0].english_name,
 			date: getFormattedDate(animatedMovie.release_date),
 			runtime: animatedMovie.runtime,
-			overview: animatedMovie.overview.substring(0, 250),
+			overview: animatedMovie.overview.substring(0, 200),
 			imdb_id: animatedMovie.imdb_id,
 			google_url: removeSpaces(animatedMovie.title, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(animatedMovie.title, ' ', '_'),
@@ -116,7 +116,7 @@
 			date: getFormattedDate(anime.first_air_date),
 			no_of_seasons: anime.number_of_seasons,
 			no_of_episodes: anime.number_of_episodes,
-			overview: anime.overview.substring(0, 250),
+			overview: anime.overview.substring(0, 200),
 			imdb_id: anime.external_ids.imdb_id,
 			google_url: removeSpaces(anime.name, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(anime.name, ' ', '_'),
@@ -153,7 +153,7 @@
 	let value = 'Entertain Me Aman';
 </script>
 
-<div class=" h-screen w-full flex flex-col justify-center text-center bg-zinc-700">
+<div class=" h-screen w-full flex flex-col justify-center text-center bg-cover" style="background-image: url('/background.png');">
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
