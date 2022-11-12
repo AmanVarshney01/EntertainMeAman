@@ -3,7 +3,7 @@
 	import TvPanel from './Components/tvPanel.svelte';
 	import { getFormattedDate, removeSpaces } from './utils';
 	import { fade, fly } from 'svelte/transition';
-	import { movies, shows, animatedMovies, games, animes } from '../data.json';
+	import { movies, shows, animatedMovies, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 
@@ -39,15 +39,17 @@
 			language: movie.spoken_languages[0].english_name,
 			date: getFormattedDate(movie.release_date),
 			runtime: movie.runtime,
-			overview: movie.overview.substring(0, 200),
+			overview: movie.overview.substring(0, 250),
 			imdb_id: movie.imdb_id,
 			google_url: removeSpaces(movie.title, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(movie.title, ' ', '_'),
 			metacritic_url: removeSpaces(movie.title, ' ', '-')
 		};
 		element = document.getElementById('button1');
-		element.style.border = '2.5px solid #4BB543';
-		// element.style.boxShadow = '120px 80px 20px #0ff'
+		element.style.borderBottom = 'thick solid #4BB543';
+		element.style.borderRadius = '8px';
+		// element.style.borderImage = 'linear-gradient(to right, red, rgba(0, 0, 0, 0)) 1 100%;';
+	
 	}
 
 	async function getShowDetails() {
@@ -64,12 +66,15 @@
 			date: getFormattedDate(show.first_air_date),
 			no_of_seasons: show.number_of_seasons,
 			no_of_episodes: show.number_of_episodes,
-			overview: show.overview.substring(0, 200),
+			overview: show.overview.substring(0, 250),
 			imdb_id: show.external_ids.imdb_id,
 			google_url: removeSpaces(show.name, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(show.name, ' ', '_'),
 			metacritic_url: removeSpaces(show.name, ' ', '-')
 		};
+		element = document.getElementById('button2');
+		element.style.borderBottom = 'thick solid #4BB543';
+		element.style.borderRadius = '8px';
 	}
 
 	async function getAnimatedMovieDetails() {
@@ -85,12 +90,15 @@
 			language: animatedMovie.spoken_languages[0].english_name,
 			date: getFormattedDate(animatedMovie.release_date),
 			runtime: animatedMovie.runtime,
-			overview: animatedMovie.overview.substring(0, 200),
+			overview: animatedMovie.overview.substring(0, 250),
 			imdb_id: animatedMovie.imdb_id,
 			google_url: removeSpaces(animatedMovie.title, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(animatedMovie.title, ' ', '_'),
 			metacritic_url: removeSpaces(animatedMovie.title, ' ', '-')
 		};
+		element = document.getElementById('button3');
+		element.style.borderBottom = 'thick solid #4BB543';
+		element.style.borderRadius = '8px';
 	}
 
 	async function getAnimeDetails() {
@@ -107,12 +115,15 @@
 			date: getFormattedDate(anime.first_air_date),
 			no_of_seasons: anime.number_of_seasons,
 			no_of_episodes: anime.number_of_episodes,
-			overview: anime.overview.substring(0, 200),
+			overview: anime.overview.substring(0, 250),
 			imdb_id: anime.external_ids.imdb_id,
 			google_url: removeSpaces(anime.name, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(anime.name, ' ', '_'),
 			metacritic_url: removeSpaces(anime.name, ' ', '-')
 		};
+		element = document.getElementById('button4');
+		element.style.borderBottom = 'thick solid #4BB543';
+		element.style.borderRadius = '8px';
 	}
 
 	const deleteData = () => {
@@ -141,7 +152,7 @@
 	let value = 'Entertain Me Aman';
 </script>
 
-<div class=" h-screen w-full flex flex-col justify-center text-center bg-neutral-200">
+<div class=" h-screen w-full flex flex-col justify-center text-center bg-stone-800">
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
@@ -183,7 +194,7 @@
 						delay: 400,
 						easing: backOut
 					}}
-					id="button1"
+					id="button2"
 					class=" hover:scale-105 delay-75 transition p-0.5"
 				>
 					<button
@@ -199,7 +210,7 @@
 						delay: 500,
 						easing: backOut
 					}}
-					id="button1"
+					id="button3"
 					class=" hover:scale-105 delay-75 transition p-0.5"
 				>
 					<button
@@ -215,7 +226,7 @@
 						delay: 600,
 						easing: backOut
 					}}
-					id="button1"
+					id="button4"
 					class=" hover:scale-105 delay-75 transition p-0.5"
 				>
 					<button
