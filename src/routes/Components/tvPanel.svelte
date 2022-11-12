@@ -16,7 +16,7 @@
 </script>
 
 <div in:fade out:fade class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
-    <div class=" shadow-lg">
+    <div class=" shadow-sm">
         <img
             class=" rounded-lg"
             src="https://image.tmdb.org/t/p/w342/{poster_path}"
@@ -24,7 +24,7 @@
         />
     </div>
     <div
-        class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-lg"
+        class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-sm"
     >
         <h1 class=" font-bold font-mono text-3xl my-4 select-all">{name}</h1>
         <div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
@@ -34,7 +34,7 @@
             <span>S: {no_of_seasons} Ep: {no_of_episodes}</span>
         </div>
         <p class=" text-left text-lg my-8">{overview}...</p>
-        <div class=" flex flex-row gap-x-10 my-4">
+        <div class=" flex flex-row gap-x-10 my-4 justify-center content-center">
             <a
                 href="https://www.imdb.com/title/{imdb_id}/"
                 target="_blank"

@@ -34,7 +34,7 @@
             <span>{runtime} mins</span>
         </div>
         <p class=" text-left text-lg my-8">{overview}...</p>
-        <div class=" flex flex-row gap-x-10 my-4">
+        <div class=" flex flex-row gap-x-10 my-4 justify-center content-center">
             <a
                 class=" hover:border-b-2 border-cyan-700"
                 href="https://www.imdb.com/title/{imdb_id}/"
