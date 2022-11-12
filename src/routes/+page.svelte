@@ -27,6 +27,10 @@
 	let showDetails: any;
 	let animeDetails: any;
 
+	// const randItem = () => {
+		
+	// }
+
 	async function getMovieDetails() {
 		const random: number = movies[Math.floor(Math.random() * movies.length)];
 		const data: any = await fetch(
@@ -150,10 +154,10 @@
 		}
 		deleteData();
 	};
-	let value = 'Entertain Me Aman';
 </script>
 
-<div class=" h-screen w-full flex flex-col justify-center text-center bg-cover" style="background-image: url('/background.png');">
+<div class=" relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black" style="background-image: url('/no_roller.png');">
+	<img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="">
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
