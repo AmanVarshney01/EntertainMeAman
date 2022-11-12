@@ -2,7 +2,8 @@
 	import MoviePanel from './Components/moviePanel.svelte';
 	import TvPanel from './Components/tvPanel.svelte';
 	import { getFormattedDate, removeSpaces } from './utils';
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
+	import { tweened } from "svelte/motion"
 	import { movies, shows, animatedMovies, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
@@ -152,7 +153,7 @@
 	let value = 'Entertain Me Aman';
 </script>
 
-<div class=" h-screen w-full flex flex-col justify-center text-center bg-stone-800">
+<div class=" h-screen w-full flex flex-col justify-center text-center bg-zinc-700">
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
@@ -168,7 +169,7 @@
 
 		{#if initialAnimate}
 			<div class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5">
-				<button on:click={getDetails} class=" cursor-pointer">Entertain Me Aman</button>
+				<button on:click={getDetails} class=" hover:text-transparent delay-100 transition bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400 cursor-pointer">Entertain Me Aman</button>
 			</div>
 
 			<div class="flex flex-row gap-2 justify-center grow-0">
@@ -179,7 +180,7 @@
 						easing: backOut
 					}}
 					id="button1"
-					class=" hover:scale-105 delay-75 transition p-0.5"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
 						class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
@@ -195,7 +196,7 @@
 						easing: backOut
 					}}
 					id="button2"
-					class=" hover:scale-105 delay-75 transition p-0.5"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
 						class="font-bold rounded bg-lime-900 text-white px-4 py-2 cursor-pointer"
@@ -211,7 +212,7 @@
 						easing: backOut
 					}}
 					id="button3"
-					class=" hover:scale-105 delay-75 transition p-0.5"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
 						class="font-bold rounded bg-orange-900 text-white px-4 py-2 cursor-pointer"
@@ -227,7 +228,7 @@
 						easing: backOut
 					}}
 					id="button4"
-					class=" hover:scale-105 delay-75 transition p-0.5"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
 						class="font-bold rounded bg-emerald-900 text-white px-4 py-2 cursor-pointer"

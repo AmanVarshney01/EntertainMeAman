@@ -1,5 +1,6 @@
 
 <script lang='ts'>
+    import { fade } from 'svelte/transition';
     export let poster_path: string;
     export let name: string;
     export let overview: string;
@@ -14,7 +15,7 @@
     export let metacritic_url: string;
 </script>
 
-<div class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
+<div in:fade out:fade class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
     <div class=" shadow-lg">
         <img
             class=" rounded-lg"
