@@ -6,9 +6,10 @@
 	import { movies, shows, animatedMovies, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { API_KEY_TMDB }	from '$lib/Env'
+	import { API_KEY_TMDB, SESSION_ID } from '$lib/Env'
 
-	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
+	const apiKeyTmdb = API_KEY_TMDB;
+	const sessionId = SESSION_ID
 
 	let initialAnimate = false;
 
@@ -29,7 +30,7 @@
 	async function getMovieDetails() {
 		let movieList: number[] = [];
 		let favMovieData: any = await fetch(
-			`https://api.themoviedb.org/3/account/15335112/favorite/movies?api_key=0f30077ee9f1be6f1d82b08eb555e7af&session_id=d491c98fee6b98ead2d5fc482d16a41962d39db7`
+			`https://api.themoviedb.org/3/account/15335112/favorite/movies?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favMovieData}
 		for (let i = 0; i < dataCopy.total_results; i++) {
@@ -60,11 +61,19 @@
 	}
 
 	async function getShowDetails() {
-		const random: number = shows[Math.floor(Math.random() * shows.length)];
-		const data: any = await fetch(
+		let showList: number[] = [];
+		let favShowData: any = await fetch(
+			`https://api.themoviedb.org/3/account/15335112/favorite/tv?api_key=0f30077ee9f1be6f1d82b08eb555e7af&session_id=d491c98fee6b98ead2d5fc482d16a41962d39db7`
+		).then((x) => x.json());
+		let dataCopy = {...favShowData}
+		for (let i = 0; i < dataCopy.total_results; i++) {
+			showList.push(dataCopy.results[i].id)
+		}
+		const random: number = showList[Math.floor(Math.random() * showList.length)];
+		const showData: any = await fetch(
 			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
-		show = { ...data };
+		show = { ...showData };
 		showDetails = {
 			name: show.name,
 			poster_path: show.poster_path,
@@ -109,7 +118,15 @@
 	}
 
 	async function getAnimeDetails() {
-		const random: number = animes[Math.floor(Math.random() * animes.length)];
+		let animeList: number[] = [];
+		let favAnimeData: any = await fetch(
+			`https://api.themoviedb.org/3/account/15335112/watchlist/tv?api_key=0f30077ee9f1be6f1d82b08eb555e7af&session_id=d491c98fee6b98ead2d5fc482d16a41962d39db7`
+		).then((x) => x.json());
+		let dataCopy = {...favAnimeData}
+		for (let i = 0; i < dataCopy.total_results; i++) {
+			animeList.push(dataCopy.results[i].id)
+		}
+		const random: number = animeList[Math.floor(Math.random() * animeList.length)];
 		const data: any = await fetch(
 			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
@@ -157,7 +174,6 @@
 	};
 </script>
 
-{API_KEY_TMDB}
 <div
 	class=" relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
 	style="background-image: url('/no_roller.png');"
