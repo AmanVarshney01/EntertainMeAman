@@ -63,7 +63,7 @@
 	async function getShowDetails() {
 		let showList: number[] = [];
 		let favShowData: any = await fetch(
-			`https://api.themoviedb.org/3/account/15335112/favorite/tv?api_key=0f30077ee9f1be6f1d82b08eb555e7af&session_id=d491c98fee6b98ead2d5fc482d16a41962d39db7`
+			`https://api.themoviedb.org/3/account/15335112/favorite/tv?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favShowData}
 		for (let i = 0; i < dataCopy.total_results; i++) {
@@ -94,7 +94,15 @@
 	}
 
 	async function getAnimatedMovieDetails() {
-		const random: number = animatedMovies[Math.floor(Math.random() * animatedMovies.length)];
+		let animatedMovieList: number[] = [];
+		let favAnimatedMovieData: any = await fetch(
+			`https://api.themoviedb.org/3/account/15335112/watchlist/movies?api_key=${apiKeyTmdb}&session_id=${sessionId}`
+		).then((x) => x.json());
+		let dataCopy = {...favAnimatedMovieData}
+		for (let i = 0; i < dataCopy.total_results; i++) {
+			animatedMovieList.push(dataCopy.results[i].id)
+		}
+		const random: number = animatedMovieList[Math.floor(Math.random() * animatedMovieList.length)];
 		const data: any = await fetch(
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
@@ -120,7 +128,7 @@
 	async function getAnimeDetails() {
 		let animeList: number[] = [];
 		let favAnimeData: any = await fetch(
-			`https://api.themoviedb.org/3/account/15335112/watchlist/tv?api_key=0f30077ee9f1be6f1d82b08eb555e7af&session_id=d491c98fee6b98ead2d5fc482d16a41962d39db7`
+			`https://api.themoviedb.org/3/account/15335112/watchlist/tv?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favAnimeData}
 		for (let i = 0; i < dataCopy.total_results; i++) {
