@@ -3,19 +3,16 @@
 	import TvPanel from './Components/tvPanel.svelte';
 	import { getFormattedDate, removeSpaces } from './utils';
 	import { fly } from 'svelte/transition';
-	import { tweened } from "svelte/motion"
 	import { movies, shows, animatedMovies, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-
-	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
+	import { API_KEY_TMDB, SESSION_ID, ACCOUNT_ID }	from '$lib/Env'
 
 	let initialAnimate = false;
 
 	onMount(() => (initialAnimate = true));
 
 	let movie: any;
-	let game: any;
 	let anime: any;
 	let animatedMovie: any;
 	let show: any;
@@ -27,16 +24,20 @@
 	let showDetails: any;
 	let animeDetails: any;
 
-	// const randItem = () => {
-		
-	// }
-
 	async function getMovieDetails() {
-		const random: number = movies[Math.floor(Math.random() * movies.length)];
-		const data: any = await fetch(
-			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
+		let movieList: number[] = [];
+		let favMovieData: any = await fetch(
+			`https://api.themoviedb.org/3/account/${ACCOUNT_ID}/favorite/movies?api_key=${API_KEY_TMDB}&session_id=${SESSION_ID}`
 		).then((x) => x.json());
-		movie = { ...data };
+		let dataCopy = {...favMovieData}
+		for (let i = 0; i < dataCopy.total_results; i++) {
+			movieList.push(dataCopy.results[i].id)
+		}
+		const random: number = movieList[Math.floor(Math.random() * movieList.length)];
+		const movieData: any = await fetch(
+			`https://api.themoviedb.org/3/movie/${random}?api_key=${API_KEY_TMDB}`
+		).then((x) => x.json());
+		movie = { ...movieData };
 		movieDetails = {
 			title: movie.title,
 			poster_path: movie.poster_path,
@@ -54,13 +55,12 @@
 		element.style.borderBottom = 'thick solid #4BB543';
 		element.style.borderRadius = '8px';
 		// element.style.borderImage = 'linear-gradient(to right, red, rgba(0, 0, 0, 0)) 1 100%;';
-	
 	}
 
 	async function getShowDetails() {
 		const random: number = shows[Math.floor(Math.random() * shows.length)];
 		const data: any = await fetch(
-			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
+			`https://api.themoviedb.org/3/tv/${random}?api_key=${API_KEY_TMDB}&append_to_response=external_ids`
 		).then((x) => x.json());
 		show = { ...data };
 		showDetails = {
@@ -85,7 +85,7 @@
 	async function getAnimatedMovieDetails() {
 		const random: number = animatedMovies[Math.floor(Math.random() * animatedMovies.length)];
 		const data: any = await fetch(
-			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
+			`https://api.themoviedb.org/3/movie/${random}?api_key=${API_KEY_TMDB}`
 		).then((x) => x.json());
 		animatedMovie = { ...data };
 		animatedMovieDetails = {
@@ -109,7 +109,7 @@
 	async function getAnimeDetails() {
 		const random: number = animes[Math.floor(Math.random() * animes.length)];
 		const data: any = await fetch(
-			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
+			`https://api.themoviedb.org/3/tv/${random}?api_key=${API_KEY_TMDB}&append_to_response=external_ids`
 		).then((x) => x.json());
 		anime = { ...data };
 		animeDetails = {
@@ -135,7 +135,6 @@
 		movie = 0;
 		show = 0;
 		animatedMovie = 0;
-		game = 0;
 		anime = 0;
 		element.style.border = null;
 	};
@@ -156,8 +155,11 @@
 	};
 </script>
 
-<div class=" relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black" style="background-image: url('/no_roller.png');">
-	<img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="">
+<div
+	class=" relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
+	style="background-image: url('/no_roller.png');"
+>
+	<img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" />
 	<div class=" flex flex-col w-3/4 mx-auto gap-4">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
@@ -173,7 +175,11 @@
 
 		{#if initialAnimate}
 			<div class=" font-bold text-cyan-700 text-8xl rounded-2xl grow-0 m-5">
-				<button on:click={getDetails} class=" hover:text-transparent delay-100 transition bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400 cursor-pointer">Entertain Me Aman</button>
+				<button
+					on:click={getDetails}
+					class=" hover:text-transparent delay-100 transition bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400 cursor-pointer"
+					>Entertain Me Aman</button
+				>
 			</div>
 
 			<div class="flex flex-row gap-2 justify-center grow-0">
@@ -241,14 +247,6 @@
 						}}>Anime</button
 					>
 				</div>
-
-				<!-- <button
-				class="font-bold rounded bg-rose-900 text-white px-4 py-2"
-				on:click={() => {
-					currentSelected = 'games';
-				}}
-				>Games
-			</button> -->
 			</div>
 		{/if}
 	</div>
