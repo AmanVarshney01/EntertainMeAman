@@ -6,7 +6,9 @@
 	import { movies, shows, animatedMovies, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { API_KEY_TMDB, SESSION_ID, ACCOUNT_ID }	from '$lib/Env'
+	import { API_KEY_TMDB }	from '$lib/Env'
+
+	const apiKeyTmdb = '0f30077ee9f1be6f1d82b08eb555e7af';
 
 	let initialAnimate = false;
 
@@ -27,7 +29,7 @@
 	async function getMovieDetails() {
 		let movieList: number[] = [];
 		let favMovieData: any = await fetch(
-			`https://api.themoviedb.org/3/account/${process.env.ACCOUNT_ID}/favorite/movies?api_key=${process.env.API_KEY_TMDB}&session_id=${process.env.SESSION_ID}`
+			`https://api.themoviedb.org/3/account/15335112/favorite/movies?api_key=0f30077ee9f1be6f1d82b08eb555e7af&session_id=d491c98fee6b98ead2d5fc482d16a41962d39db7`
 		).then((x) => x.json());
 		let dataCopy = {...favMovieData}
 		for (let i = 0; i < dataCopy.total_results; i++) {
@@ -35,7 +37,7 @@
 		}
 		const random: number = movieList[Math.floor(Math.random() * movieList.length)];
 		const movieData: any = await fetch(
-			`https://api.themoviedb.org/3/movie/${random}?api_key=${API_KEY_TMDB}`
+			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		movie = { ...movieData };
 		movieDetails = {
@@ -60,7 +62,7 @@
 	async function getShowDetails() {
 		const random: number = shows[Math.floor(Math.random() * shows.length)];
 		const data: any = await fetch(
-			`https://api.themoviedb.org/3/tv/${random}?api_key=${API_KEY_TMDB}&append_to_response=external_ids`
+			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		show = { ...data };
 		showDetails = {
@@ -85,7 +87,7 @@
 	async function getAnimatedMovieDetails() {
 		const random: number = animatedMovies[Math.floor(Math.random() * animatedMovies.length)];
 		const data: any = await fetch(
-			`https://api.themoviedb.org/3/movie/${random}?api_key=${API_KEY_TMDB}`
+			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		animatedMovie = { ...data };
 		animatedMovieDetails = {
@@ -109,7 +111,7 @@
 	async function getAnimeDetails() {
 		const random: number = animes[Math.floor(Math.random() * animes.length)];
 		const data: any = await fetch(
-			`https://api.themoviedb.org/3/tv/${random}?api_key=${API_KEY_TMDB}&append_to_response=external_ids`
+			`https://api.themoviedb.org/3/tv/${random}?api_key=${apiKeyTmdb}&append_to_response=external_ids`
 		).then((x) => x.json());
 		anime = { ...data };
 		animeDetails = {
@@ -155,6 +157,7 @@
 	};
 </script>
 
+{API_KEY_TMDB}
 <div
 	class=" relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
 	style="background-image: url('/no_roller.png');"
