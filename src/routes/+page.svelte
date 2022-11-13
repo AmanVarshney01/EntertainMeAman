@@ -27,7 +27,7 @@
 	async function getMovieDetails() {
 		let movieList: number[] = [];
 		let favMovieData: any = await fetch(
-			`https://api.themoviedb.org/3/account/${ACCOUNT_ID}/favorite/movies?api_key=${API_KEY_TMDB}&session_id=${SESSION_ID}`
+			`https://api.themoviedb.org/3/account/${process.env.ACCOUNT_ID}/favorite/movies?api_key=${process.env.API_KEY_TMDB}&session_id=${process.env.SESSION_ID}`
 		).then((x) => x.json());
 		let dataCopy = {...favMovieData}
 		for (let i = 0; i < dataCopy.total_results; i++) {

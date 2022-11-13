@@ -3,6 +3,9 @@ import type { UserConfig } from 'vite';
 
 const config: UserConfig = {
 	plugins: [sveltekit()],
+	define: {
+		'process.env': process.env,
+	},	
 };
 
 export default config;

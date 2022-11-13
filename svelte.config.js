@@ -12,9 +12,6 @@ const config = {
 	],
 
 	kit: {
-		// define: {
-		// 	'process.env': process.env,
-		// },	
 		adapter: adapter()
 	}
 };
