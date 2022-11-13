@@ -3,7 +3,6 @@
 	import TvPanel from './Components/tvPanel.svelte';
 	import { getFormattedDate, removeSpaces } from './utils';
 	import { fly } from 'svelte/transition';
-	import { movies, shows, animatedMovies, animes } from '../data.json';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import { API_KEY_TMDB, SESSION_ID } from '$lib/Env'
@@ -28,19 +27,21 @@
 	let animeDetails: any;
 
 	async function getMovieDetails() {
-		let movieList: number[] = [];
+		let movieList: any[] = [];
 		let favMovieData: any = await fetch(
 			`https://api.themoviedb.org/3/account/15335112/favorite/movies?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favMovieData}
-		for (let i = 0; i < dataCopy.total_results; i++) {
+		for (let i = 0; i < dataCopy.results.length; i++) {
 			movieList.push(dataCopy.results[i].id)
 		}
+		console.log(movieList)
 		const random: number = movieList[Math.floor(Math.random() * movieList.length)];
 		const movieData: any = await fetch(
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		movie = { ...movieData };
+		console.log(movie)
 		movieDetails = {
 			title: movie.title,
 			poster_path: movie.poster_path,
@@ -54,9 +55,9 @@
 			rotten_tomatoes_url: removeSpaces(movie.title, ' ', '_'),
 			metacritic_url: removeSpaces(movie.title, ' ', '-')
 		};
-		element = document.getElementById('button1');
-		element.style.borderBottom = 'thick solid #4BB543';
-		element.style.borderRadius = '8px';
+		// element = document.getElementById('button1');
+		// element.style.borderBottom = 'thick solid #4BB543';
+		// element.style.borderRadius = '8px';
 		// element.style.borderImage = 'linear-gradient(to right, red, rgba(0, 0, 0, 0)) 1 100%;';
 	}
 
@@ -66,7 +67,7 @@
 			`https://api.themoviedb.org/3/account/15335112/favorite/tv?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favShowData}
-		for (let i = 0; i < dataCopy.total_results; i++) {
+		for (let i = 0; i < dataCopy.results.length; i++) {
 			showList.push(dataCopy.results[i].id)
 		}
 		const random: number = showList[Math.floor(Math.random() * showList.length)];
@@ -88,9 +89,9 @@
 			rotten_tomatoes_url: removeSpaces(show.name, ' ', '_'),
 			metacritic_url: removeSpaces(show.name, ' ', '-')
 		};
-		element = document.getElementById('button2');
-		element.style.borderBottom = 'thick solid #4BB543';
-		element.style.borderRadius = '8px';
+		// element = document.getElementById('button2');
+		// element.style.borderBottom = 'thick solid #4BB543';
+		// element.style.borderRadius = '8px';
 	}
 
 	async function getAnimatedMovieDetails() {
@@ -99,7 +100,7 @@
 			`https://api.themoviedb.org/3/account/15335112/watchlist/movies?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favAnimatedMovieData}
-		for (let i = 0; i < dataCopy.total_results; i++) {
+		for (let i = 0; i < dataCopy.results.length; i++) {
 			animatedMovieList.push(dataCopy.results[i].id)
 		}
 		const random: number = animatedMovieList[Math.floor(Math.random() * animatedMovieList.length)];
@@ -120,9 +121,9 @@
 			rotten_tomatoes_url: removeSpaces(animatedMovie.title, ' ', '_'),
 			metacritic_url: removeSpaces(animatedMovie.title, ' ', '-')
 		};
-		element = document.getElementById('button3');
-		element.style.borderBottom = 'thick solid #4BB543';
-		element.style.borderRadius = '8px';
+		// element = document.getElementById('button3');
+		// element.style.borderBottom = 'thick solid #4BB543';
+		// element.style.borderRadius = '8px';
 	}
 
 	async function getAnimeDetails() {
@@ -131,7 +132,7 @@
 			`https://api.themoviedb.org/3/account/15335112/watchlist/tv?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
 		let dataCopy = {...favAnimeData}
-		for (let i = 0; i < dataCopy.total_results; i++) {
+		for (let i = 0; i < dataCopy.results.length; i++) {
 			animeList.push(dataCopy.results[i].id)
 		}
 		const random: number = animeList[Math.floor(Math.random() * animeList.length)];
@@ -153,9 +154,9 @@
 			rotten_tomatoes_url: removeSpaces(anime.name, ' ', '_'),
 			metacritic_url: removeSpaces(anime.name, ' ', '-')
 		};
-		element = document.getElementById('button4');
-		element.style.borderBottom = 'thick solid #4BB543';
-		element.style.borderRadius = '8px';
+		// element = document.getElementById('button4');
+		// element.style.borderBottom = 'thick solid #4BB543';
+		// element.style.borderRadius = '8px';
 	}
 
 	const deleteData = () => {
@@ -163,7 +164,7 @@
 		show = 0;
 		animatedMovie = 0;
 		anime = 0;
-		element.style.border = null;
+		// element.style.border = null;
 	};
 
 	const getDetails = () => {
