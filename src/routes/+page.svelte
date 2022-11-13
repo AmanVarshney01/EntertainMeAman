@@ -5,10 +5,10 @@
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { API_KEY_TMDB, SESSION_ID } from '$lib/Env'
+	import { API_KEY_TMDB, SESSION_ID } from '$lib/Env';
 
 	const apiKeyTmdb = API_KEY_TMDB;
-	const sessionId = SESSION_ID
+	const sessionId = SESSION_ID;
 
 	let initialAnimate = false;
 
@@ -31,17 +31,15 @@
 		let favMovieData: any = await fetch(
 			`https://api.themoviedb.org/3/account/15335112/favorite/movies?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
-		let dataCopy = {...favMovieData}
+		let dataCopy = { ...favMovieData };
 		for (let i = 0; i < dataCopy.results.length; i++) {
-			movieList.push(dataCopy.results[i].id)
+			movieList.push(dataCopy.results[i].id);
 		}
-		console.log(movieList)
 		const random: number = movieList[Math.floor(Math.random() * movieList.length)];
 		const movieData: any = await fetch(
 			`https://api.themoviedb.org/3/movie/${random}?api_key=${apiKeyTmdb}`
 		).then((x) => x.json());
 		movie = { ...movieData };
-		console.log(movie)
 		movieDetails = {
 			title: movie.title,
 			poster_path: movie.poster_path,
@@ -66,9 +64,9 @@
 		let favShowData: any = await fetch(
 			`https://api.themoviedb.org/3/account/15335112/favorite/tv?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
-		let dataCopy = {...favShowData}
+		let dataCopy = { ...favShowData };
 		for (let i = 0; i < dataCopy.results.length; i++) {
-			showList.push(dataCopy.results[i].id)
+			showList.push(dataCopy.results[i].id);
 		}
 		const random: number = showList[Math.floor(Math.random() * showList.length)];
 		const showData: any = await fetch(
@@ -99,9 +97,9 @@
 		let favAnimatedMovieData: any = await fetch(
 			`https://api.themoviedb.org/3/account/15335112/watchlist/movies?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
-		let dataCopy = {...favAnimatedMovieData}
+		let dataCopy = { ...favAnimatedMovieData };
 		for (let i = 0; i < dataCopy.results.length; i++) {
-			animatedMovieList.push(dataCopy.results[i].id)
+			animatedMovieList.push(dataCopy.results[i].id);
 		}
 		const random: number = animatedMovieList[Math.floor(Math.random() * animatedMovieList.length)];
 		const data: any = await fetch(
@@ -131,9 +129,9 @@
 		let favAnimeData: any = await fetch(
 			`https://api.themoviedb.org/3/account/15335112/watchlist/tv?api_key=${apiKeyTmdb}&session_id=${sessionId}`
 		).then((x) => x.json());
-		let dataCopy = {...favAnimeData}
+		let dataCopy = { ...favAnimeData };
 		for (let i = 0; i < dataCopy.results.length; i++) {
-			animeList.push(dataCopy.results[i].id)
+			animeList.push(dataCopy.results[i].id);
 		}
 		const random: number = animeList[Math.floor(Math.random() * animeList.length)];
 		const data: any = await fetch(
@@ -220,12 +218,18 @@
 					id="button1"
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
-					<button
-						class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
-						on:click={() => {
-							currentSelected = 'movies';
-						}}>Movies</button
-					>
+					<!-- {#if movie}
+						<button class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
+							>Movies</button
+						>
+					{:else} -->
+						<button
+							class="font-bold rounded-full bg-cyan-900 text-white px-4 py-2 cursor-pointer active:shadow-md active:shadow-emerald-500"
+							on:click={() => {
+								currentSelected = 'movies';
+							}}>Movies</button
+						>
+					<!-- {/if} -->
 				</div>
 				<div
 					transition:fly={{
@@ -237,7 +241,7 @@
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
-						class="font-bold rounded bg-lime-900 text-white px-4 py-2 cursor-pointer"
+						class="font-bold rounded-full bg-lime-900 text-white px-4 py-2 cursor-pointer active:shadow-md active:shadow-emerald-500"
 						on:click={() => {
 							currentSelected = 'shows';
 						}}>Shows</button
@@ -253,7 +257,7 @@
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
-						class="font-bold rounded bg-orange-900 text-white px-4 py-2 cursor-pointer"
+						class="font-bold rounded-full bg-orange-900 text-white px-4 py-2 cursor-pointer active:shadow-md active:shadow-emerald-500"
 						on:click={() => {
 							currentSelected = 'animatedMovies';
 						}}>Animated Movies</button
@@ -269,7 +273,7 @@
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
-						class="font-bold rounded bg-emerald-900 text-white px-4 py-2 cursor-pointer"
+						class="font-bold rounded-full bg-emerald-900 text-white px-4 py-2 cursor-pointer active:shadow-md active:shadow-emerald-500"
 						on:click={() => {
 							currentSelected = 'anime';
 						}}>Anime</button
