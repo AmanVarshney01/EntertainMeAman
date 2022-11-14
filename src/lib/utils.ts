@@ -4,8 +4,7 @@ export const getFormattedDate = (d: string) => {
 };
 
 export const removeSpaces = (string: string, target: string, replacement: string) => {
-    for (let i = 0; i < string.length; i++) {
-        string = string.replace(target, replacement);
-    }
+    
+    string = string.replaceAll(target, replacement).replaceAll("'", "").replaceAll(":", "")
     return string.toLowerCase();
 };

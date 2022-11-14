@@ -1,7 +1,7 @@
 <script lang="ts">
 	import MoviePanel from './Components/moviePanel.svelte';
 	import TvPanel from './Components/tvPanel.svelte';
-	import { getFormattedDate, removeSpaces } from './utils';
+	import { getFormattedDate, removeSpaces } from '$lib/utils';
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
