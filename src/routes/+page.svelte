@@ -216,7 +216,7 @@
 						easing: backOut
 					}}
 					id="button1"
-					class=" hover:scale-110 delay-75 transition p-0.5 active:shadow-md active:shadow-emerald-500"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<!-- {#if movie}
 						<button class="font-bold rounded bg-cyan-900 text-white px-4 py-2 cursor-pointer"
@@ -224,7 +224,7 @@
 						>
 					{:else} -->
 						<button
-							class="font-bold rounded-full bg-cyan-900 text-white px-4 py-2 cursor-pointer"
+							class="font-bold rounded-full bg-cyan-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'movies';
 							}}>Movies</button
@@ -238,10 +238,10 @@
 						easing: backOut
 					}}
 					id="button2"
-					class=" hover:scale-110 delay-75 transition p-0.5 active:shadow-md active:shadow-emerald-500"
+					class=" hover:scale-110 delay-75 transition p-0.5 "
 				>
 					<button
-						class="font-bold rounded-full bg-lime-900 text-white px-4 py-2 cursor-pointer"
+						class="font-bold rounded-full bg-lime-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 						on:click={() => {
 							currentSelected = 'shows';
 						}}>Shows</button
@@ -254,10 +254,10 @@
 						easing: backOut
 					}}
 					id="button3"
-					class=" hover:scale-110 delay-75 transition p-0.5 active:shadow-md active:shadow-emerald-500"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
-						class="font-bold rounded-full bg-orange-900 text-white px-4 py-2 cursor-pointer  transition delay-75"
+						class="font-bold rounded-full bg-orange-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 						on:click={() => {
 							currentSelected = 'animatedMovies';
 						}}>Animated Movies</button
@@ -270,10 +270,10 @@
 						easing: backOut
 					}}
 					id="button4"
-					class=" hover:scale-110 delay-75 transition p-0.5 active:shadow-md active:shadow-emerald-500"
+					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					<button
-						class="font-bold rounded-full bg-emerald-900 text-white px-4 py-2 cursor-pointer "
+						class="font-bold rounded-full bg-emerald-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 						on:click={() => {
 							currentSelected = 'anime';
 						}}>Anime</button
