@@ -182,7 +182,7 @@
 </script>
 
 <div
-	class=" relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
+	class=" antialiased relative min-h-screen min-w-full w-full flex flex-col justify-center text-center bg-cover bg-black"
 	style="background-image: url('/no_roller.png');"
 >
 	<img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" />
@@ -200,7 +200,7 @@
 		{/if}
 
 		{#if initialAnimate}
-			<div class=" font-bold text-8xl rounded-2xl grow-0 m-5 select-none">
+			<div class=" font-bold 2xl:text-8xl xl:text-6xl lg:text-5xl md:text-5xl sm:text-4xl rounded-2xl grow-0 m-5 select-none">
 				<button
 					on:click={getDetails}
 					class=" text-transparent delay-100 transition bg-clip-text bg-gradient-to-r hover:from-green-500 hover:to-emerald-400 cursor-pointer from-sky-500 to-sky-600"
