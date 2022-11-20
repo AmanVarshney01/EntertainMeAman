@@ -182,7 +182,7 @@
 </script>
 
 <div
-	class=" antialiased relative min-h-screen min-w-full w-full flex flex-col justify-center text-center bg-cover bg-black"
+	class=" antialiased relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
 	style="background-image: url('/no_roller.png');"
 >
 	<img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" />
