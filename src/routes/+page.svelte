@@ -183,9 +183,9 @@
 
 <div
 	class=" antialiased relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
-	style="background-image: url('/no_roller.png');"
+	style="background-image: url('/backgroundimage.png');"
 >
-	<img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" />
+	<!-- <img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" /> -->
 	<div class=" flex flex-col lg:w-3/4 w-full mx-auto lg:gap-4 gap-2 gap-y-7 selection:bg-cyan-600">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
