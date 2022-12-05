@@ -204,7 +204,7 @@
 				<button
 					on:click={getDetails}
 					class=" text-transparent delay-100 transition bg-clip-text bg-gradient-to-r hover:from-green-500 hover:to-emerald-400 cursor-pointer from-sky-500 to-sky-600"
-					>Entertain Me Aman</button
+					>SUGGEST ME AMAN</button
 				>
 			</div>
 
