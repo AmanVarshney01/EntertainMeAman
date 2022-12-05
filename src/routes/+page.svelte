@@ -47,7 +47,7 @@
 			language: movie.spoken_languages[0].english_name,
 			date: getFormattedDate(movie.release_date),
 			runtime: movie.runtime,
-			overview: movie.overview.substring(0, 200),
+			overview: movie.overview,
 			imdb_id: movie.imdb_id,
 			google_url: removeSpaces(movie.title, ' ', '+'),
 			rotten_tomatoes_url: removeSpaces(movie.title, ' ', '_'),
@@ -186,7 +186,7 @@
 	style="background-image: url('/backgroundimage.png');"
 >
 	<!-- <img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" /> -->
-	<div class=" flex flex-col lg:w-3/4 w-full mx-auto lg:gap-4 gap-2 gap-y-7 selection:bg-cyan-600">
+	<div class=" flex flex-col lg:w-3/4 w-full mx-auto lg:gap-3 gap-2 gap-y-7 selection:bg-cyan-600">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
 		{:else if show}
@@ -200,7 +200,7 @@
 		{/if}
 
 		{#if initialAnimate}
-			<div class=" font-bold lg:text-8xl text-4xl rounded-2xl grow-0 lg:m-5 m-2 select-none">
+			<div class=" font-bold lg:text-7xl text-4xl rounded-2xl grow-0 lg:m-3 m-2 select-none">
 				<button
 					on:click={getDetails}
 					class=" text-transparent delay-100 transition bg-clip-text bg-gradient-to-r hover:from-green-500 hover:to-emerald-400 cursor-pointer from-sky-500 to-sky-600"

@@ -14,7 +14,7 @@
 	export let metacritic_url: string;
 </script>
 
-<div in:fade out:fade class=" flex flex-row mx-auto grow-0 h-auto lg:w-2/3 gap-2">
+<div in:fade out:fade class=" flex flex-row mx-auto grow-0 h-auto lg:max-w-fit gap-2">
 	<div class=" shadow-sm">
 		<img
 			class=" rounded-lg"
