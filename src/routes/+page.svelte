@@ -319,6 +319,16 @@
 							}}>Anime</button
 						>
 					{/if}
+				</div>
+				<div
+					transition:fly={{
+						y: 50,
+						delay: 600,
+						easing: backOut
+					}}
+					id="button4"
+					class=" hover:scale-110 delay-75 transition p-0.5"
+				>
 					{#if game}
 						<button
 							class=" rounded-full bg-yellow-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
