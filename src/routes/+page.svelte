@@ -6,7 +6,7 @@
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 	import { API_KEY_TMDB, SESSION_ID, API_KEY_RAWG } from '$lib/Env';
-	import {games} from '$lib/data.json'
+	import { games } from '$lib/data.json';
 
 	const apiKeyTmdb = API_KEY_TMDB;
 	const sessionId = SESSION_ID;
@@ -188,12 +188,13 @@
 			getAnimatedMovieDetails();
 		} else if (currentSelected == 'anime') {
 			getAnimeDetails();
+		} else if (currentSelected == 'games') {
+			getGamesDetails();
 		} else {
 			getMovieDetails();
 		}
 		deleteData();
 	};
-	getGamesDetails();
 </script>
 
 <div
@@ -327,7 +328,7 @@
 						<button
 							class=" rounded-full bg-yellow-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
-								currentSelected = 'anime';
+								currentSelected = 'games';
 							}}>Games</button
 						>
 					{/if}
