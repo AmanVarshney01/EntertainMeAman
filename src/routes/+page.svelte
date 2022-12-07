@@ -5,10 +5,12 @@
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { API_KEY_TMDB, SESSION_ID } from '$lib/Env';
+	import { API_KEY_TMDB, SESSION_ID, API_KEY_RAWG } from '$lib/Env';
+	import {games} from '$lib/data.json'
 
 	const apiKeyTmdb = API_KEY_TMDB;
 	const sessionId = SESSION_ID;
+	const apiKeyRawg = API_KEY_RAWG;
 
 	let initialAnimate = false;
 
@@ -18,6 +20,7 @@
 	let anime: any;
 	let animatedMovie: any;
 	let show: any;
+	let game: any;
 	// let element: any = 0;
 
 	let currentSelected: string;
@@ -25,6 +28,17 @@
 	let animatedMovieDetails: any;
 	let showDetails: any;
 	let animeDetails: any;
+	let gameDetails: any;
+
+	async function getGamesDetails() {
+		let gameData: any = await fetch(
+			`https://api.rawg.io/api/games/${games[0]}?key=${apiKeyRawg}`
+		).then((x) => x.json());
+		game = { ...gameData };
+		gameDetails = {
+			title: game.name
+		};
+	}
 
 	async function getMovieDetails() {
 		let movieList: any[] = [];
@@ -179,6 +193,7 @@
 		}
 		deleteData();
 	};
+	getGamesDetails();
 </script>
 
 <div
@@ -195,6 +210,8 @@
 			<MoviePanel {...animatedMovieDetails} />
 		{:else if anime}
 			<TvPanel {...animeDetails} />
+		{:else if game}
+			<MoviePanel {...gameDetails} />
 		{:else}
 			<div class="" />
 		{/if}
@@ -299,6 +316,19 @@
 							on:click={() => {
 								currentSelected = 'anime';
 							}}>Anime</button
+						>
+					{/if}
+					{#if game}
+						<button
+							class=" rounded-full bg-yellow-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							>Games</button
+						>
+					{:else}
+						<button
+							class=" rounded-full bg-yellow-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							on:click={() => {
+								currentSelected = 'anime';
+							}}>Games</button
 						>
 					{/if}
 				</div>
