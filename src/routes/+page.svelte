@@ -32,7 +32,7 @@
 
 	async function getGamesDetails() {
 		let gameData: any = await fetch(
-			`https://api.rawg.io/api/games/${games[0]}?key=${apiKeyRawg}`
+			`https://api.rawg.io/api/games/${games[Math.floor(Math.random() * games.length)]}?key=${apiKeyRawg}`
 		).then((x) => x.json());
 		game = { ...gameData };
 		gameDetails = {
