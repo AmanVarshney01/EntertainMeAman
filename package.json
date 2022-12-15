@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^1.0.0",
 		"@tailwindcss/typography": "^0.5.7"
 	}
 }
