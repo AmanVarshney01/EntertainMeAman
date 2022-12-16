@@ -7,6 +7,9 @@
 	import { onMount } from 'svelte';
 	import { API_KEY_TMDB, SESSION_ID, API_KEY_RAWG } from '$lib/Env';
 	import { games } from '$lib/data.json';
+	import { inject } from '@vercel/analytics';
+
+	inject();
 
 	const apiKeyTmdb = API_KEY_TMDB;
 	const sessionId = SESSION_ID;
