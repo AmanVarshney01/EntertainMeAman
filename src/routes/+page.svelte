@@ -1,6 +1,7 @@
 <script lang="ts">
 	import MoviePanel from './Components/moviePanel.svelte';
 	import TvPanel from './Components/tvPanel.svelte';
+	import GamePanel from './Components/gamePanel.svelte';
 	import { getFormattedDate, removeSpaces } from '$lib/utils';
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
@@ -8,8 +9,9 @@
 	import { API_KEY_TMDB, SESSION_ID, API_KEY_RAWG } from '$lib/Env';
 	import { games } from '$lib/data.json';
 	import { inject } from '@vercel/analytics';
+	import type { PageData } from './$types';
 
-	inject();
+	// inject();
 
 	const apiKeyTmdb = API_KEY_TMDB;
 	const sessionId = SESSION_ID;
@@ -34,12 +36,16 @@
 	let gameDetails: any;
 
 	async function getGamesDetails() {
-		let gameData: any = await fetch(
-			`https://api.rawg.io/api/games/${games[Math.floor(Math.random() * games.length)]}?key=${apiKeyRawg}`
+		let gameData: PageData = await fetch(
+			`https://api.rawg.io/api/games/${
+				games[Math.floor(Math.random() * games.length)]
+			}?key=${apiKeyRawg}`
 		).then((x) => x.json());
 		game = { ...gameData };
 		gameDetails = {
-			title: game.name
+			title: game.name,
+			poster_path: game.background_image,
+			overview: game.description.substring(0, 200)
 		};
 	}
 
@@ -215,7 +221,7 @@
 		{:else if anime}
 			<TvPanel {...animeDetails} />
 		{:else if game}
-			<MoviePanel {...gameDetails} />
+			<GamePanel {...gameDetails} />
 		{:else}
 			<div class="" />
 		{/if}
@@ -241,12 +247,14 @@
 				>
 					{#if movie}
 						<button
-							class=" rounded-full bg-cyan-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Movies</button
 						>
 					{:else}
 						<button
-							class=" rounded-full bg-cyan-900 text-white px-4 py-2 cursor-pointer transition delay-75 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-75 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'movies';
 							}}>Movies</button
@@ -264,12 +272,14 @@
 				>
 					{#if show}
 						<button
-							class=" rounded-full bg-lime-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Shows</button
 						>
 					{:else}
 						<button
-							class=" rounded-full bg-lime-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'shows';
 							}}>Shows</button
@@ -288,12 +298,14 @@
 				>
 					{#if animatedMovie}
 						<button
-							class="rounded-full bg-orange-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							style="background-color:#F03A47"
+							class="rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Animated Movies</button
 						>
 					{:else}
 						<button
-							class=" rounded-full bg-orange-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'animatedMovies';
 							}}>Animated Movies</button
@@ -311,12 +323,14 @@
 				>
 					{#if anime}
 						<button
-							class=" rounded-full bg-emerald-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Anime</button
 						>
 					{:else}
 						<button
-							class=" rounded-full bg-emerald-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'anime';
 							}}>Anime</button
@@ -334,12 +348,14 @@
 				>
 					{#if game}
 						<button
-							class=" rounded-full bg-yellow-900 text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Games</button
 						>
 					{:else}
 						<button
-							class=" rounded-full bg-yellow-900 text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							style="background-color:#F03A47"
+							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'games';
 							}}>Games</button
