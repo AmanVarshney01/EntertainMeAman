@@ -1,4 +1,6 @@
-# EntertainMeAman
+# SuggestMeAman
+
+suggestions of movies, anime, games, tvshows, animated movies
 
 ![Screenshot 2022-11-14 000313](https://user-images.githubusercontent.com/45312299/201538310-bafed418-fa46-4b29-aa43-a682b0e8491e.png)
 
