@@ -1,21 +1,20 @@
 <script lang="ts">
 	import MoviePanel from './Components/moviePanel.svelte';
 	import TvPanel from './Components/tvPanel.svelte';
-	import GamePanel from './Components/gamePanel.svelte';
+	// import GamePanel from './Components/gamePanel.svelte';
 	import { getFormattedDate, removeSpaces } from '$lib/utils';
 	import { fly } from 'svelte/transition';
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
-	import { API_KEY_TMDB, SESSION_ID, API_KEY_RAWG } from '$lib/Env';
-	import { games } from '$lib/data.json';
+	import { API_KEY_TMDB, SESSION_ID} from '$lib/Env';
+	// import { games } from '$lib/data.json';
 	import { inject } from '@vercel/analytics';
-	import type { PageData } from './$types';
 
-	// inject();
+	inject();
 
 	const apiKeyTmdb = API_KEY_TMDB;
 	const sessionId = SESSION_ID;
-	const apiKeyRawg = API_KEY_RAWG;
+	// const apiKeyRawg = API_KEY_RAWG;
 
 	let initialAnimate = false;
 
@@ -25,29 +24,26 @@
 	let anime: any;
 	let animatedMovie: any;
 	let show: any;
-	let game: any;
-	// let element: any = 0;
 
 	let currentSelected: string;
 	let movieDetails: any;
 	let animatedMovieDetails: any;
 	let showDetails: any;
 	let animeDetails: any;
-	let gameDetails: any;
 
-	async function getGamesDetails() {
-		let gameData: PageData = await fetch(
-			`https://api.rawg.io/api/games/${
-				games[Math.floor(Math.random() * games.length)]
-			}?key=${apiKeyRawg}`
-		).then((x) => x.json());
-		game = { ...gameData };
-		gameDetails = {
-			title: game.name,
-			poster_path: game.background_image,
-			overview: game.description.substring(0, 200)
-		};
-	}
+	// async function getGamesDetails() {
+	// 	let gameData: PageData = await fetch(
+	// 		`https://api.rawg.io/api/games/${
+	// 			games[Math.floor(Math.random() * games.length)]
+	// 		}?key=${apiKeyRawg}`
+	// 	).then((x) => x.json());
+	// 	game = { ...gameData };
+	// 	gameDetails = {
+	// 		title: game.name,
+	// 		poster_path: game.background_image,
+	// 		overview: game.description.substring(0, 200)
+	// 	};
+	// }
 
 	async function getMovieDetails() {
 		let movieList: any[] = [];
@@ -197,8 +193,8 @@
 			getAnimatedMovieDetails();
 		} else if (currentSelected == 'anime') {
 			getAnimeDetails();
-		} else if (currentSelected == 'games') {
-			getGamesDetails();
+		// } else if (currentSelected == 'games') {
+		// 	getGamesDetails();
 		} else {
 			getMovieDetails();
 		}
@@ -220,10 +216,10 @@
 			<MoviePanel {...animatedMovieDetails} />
 		{:else if anime}
 			<TvPanel {...animeDetails} />
-		{:else if game}
-			<GamePanel {...gameDetails} />
+		<!--{:else if game}-->
+		<!--	<GamePanel {...gameDetails} />-->
 		{:else}
-			<div class="" />
+			<div class=""></div>
 		{/if}
 
 		{#if initialAnimate}
@@ -337,31 +333,31 @@
 						>
 					{/if}
 				</div>
-				<div
-					transition:fly={{
-						y: 50,
-						delay: 600,
-						easing: backOut
-					}}
-					id="button4"
-					class=" hover:scale-110 delay-75 transition p-0.5"
-				>
-					{#if game}
-						<button
-							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
-							>Games</button
-						>
-					{:else}
-						<button
-							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
-							on:click={() => {
-								currentSelected = 'games';
-							}}>Games</button
-						>
-					{/if}
-				</div>
+<!--				<div-->
+<!--					transition:fly={{-->
+<!--						y: 50,-->
+<!--						delay: 600,-->
+<!--						easing: backOut-->
+<!--					}}-->
+<!--					id="button4"-->
+<!--					class=" hover:scale-110 delay-75 transition p-0.5"-->
+<!--				>-->
+					<!--{#if game}-->
+					<!--	<button-->
+					<!--		style="background-color:#F03A47"-->
+					<!--		class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"-->
+					<!--		>Games</button-->
+					<!--	>-->
+					<!--{:else}-->
+					<!--	<button-->
+					<!--		style="background-color:#F03A47"-->
+					<!--		class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"-->
+					<!--		on:click={() => {-->
+					<!--			currentSelected = 'games';-->
+					<!--		}}>Games</button-->
+					<!--	>-->
+					<!--{/if}-->
+<!--				</div>-->
 			</div>
 		{/if}
 	</div>
