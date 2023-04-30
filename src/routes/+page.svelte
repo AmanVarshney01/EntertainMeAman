@@ -189,9 +189,9 @@
 </script>
 
 <section
-	class=" relative min-h-screen w-full flex flex-col justify-center text-center bg-[#121212] px-2 py-10"
+	class=" relative min-h-[100svh] w-full flex flex-col justify-center text-center bg-[#121212] px-2 py-10"
 >
-	<div style="background-image: url('/backgroundimage.png');" class="z-0 opacity-50 w-full h-screen fixed top-0 left-0 lg:bg-cover bg-center"></div>
+	<div style="background-image: url('/backgroundimage.png');" class="z-0 opacity-50 w-full h-[100svh] fixed top-0 left-0 lg:bg-cover bg-center"></div>
 
 	<!-- <img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" /> -->
 	<div class="z-10 flex flex-col lg:w-3/4 w-full mx-auto lg:gap-3 gap-2 gap-y-7 selection:bg-cyan-600 mb-10">
@@ -318,7 +318,7 @@
 			</div>
 		{/if}
 	</div>
-	<footer class="absolute bottom-0 left-0 text-white w-full lg:text-lg text-sm lg:p-5 p-5 z-10 flex flex-row lg:justify-center justify-between items-center lg:gap-4 gap-2">
+	<footer class="absolute bottom-0 left-0 text-white w-full lg:text-lg text-sm lg:p-5 p-5 z-10 flex flex-row lg:justify-center justify-around items-center lg:gap-4 gap-2">
 		<p>Made with SvelteKit, TailwindCSS and TheMovieDB</p>
 		<a target="_blank" href="https://github.com/AmanVarshney01/SuggestMeAman">
 			<img src="/github.svg" class="hover:animate-spin lg:w-8 lg:h-8 h-6 w-6 bg-white rounded-full border border-white" alt="Github">
