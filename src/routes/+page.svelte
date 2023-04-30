@@ -208,10 +208,10 @@
 		{/if}
 
 		{#if initialAnimate}
-			<div class="relative font-bold lg:text-7xl text-4xl rounded-2xl grow-0 lg:m-3 m-2 select-none">
+			<div class="relative font-bold lg:text-7xl text-3xl rounded-2xl grow-0 lg:m-3 m-2 select-none">
 				<h1
 					on:click={getDetails}
-					class=" text-transparent hover:scale-105 delay-100 transition bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400 cursor-pointer"
+					class="text-transparent hover:scale-105 delay-100 transition bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400 cursor-pointer"
 					>SUGGEST ME AMAN</h1
 				>
 <!--				<span class="self-end text-white text-xs">Click Me</span>-->
@@ -279,7 +279,7 @@
 						<button
 							style="background-color:#F03A47"
 							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
-							>Animated Movies</button
+							>Cartoon</button
 						>
 					{:else}
 						<button
@@ -287,7 +287,7 @@
 							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'animatedMovies';
-							}}>Animated Movies</button
+							}}>Cartoon</button
 						>
 					{/if}
 				</div>
@@ -318,7 +318,7 @@
 			</div>
 		{/if}
 	</div>
-	<footer class="absolute bottom-0 left-0 text-white w-full lg:text-lg text-sm lg:p-5 p-2 z-10 flex flex-row justify-center items-center lg:gap-4 gap-2">
+	<footer class="absolute bottom-0 left-0 text-white w-full lg:text-lg text-sm lg:p-5 p-5 z-10 flex flex-row lg:justify-center justify-between items-center lg:gap-4 gap-2">
 		<p>Made with SvelteKit, TailwindCSS and TheMovieDB</p>
 		<a target="_blank" href="https://github.com/AmanVarshney01/SuggestMeAman">
 			<img src="/github.svg" class="hover:animate-spin lg:w-8 lg:h-8 h-6 w-6 bg-white rounded-full border border-white" alt="Github">
