@@ -72,10 +72,6 @@
 			rotten_tomatoes_url: removeSpaces(movie.title, ' ', '_'),
 			metacritic_url: removeSpaces(movie.title, ' ', '-')
 		};
-		// element = document.getElementById('button1');
-		// element.style.borderBottom = 'thick solid #4BB543';
-		// element.style.borderRadius = '8px';
-		// element.style.borderImage = 'linear-gradient(to right, red, rgba(0, 0, 0, 0)) 1 100%;';
 	}
 
 	async function getShowDetails() {
@@ -106,9 +102,6 @@
 			rotten_tomatoes_url: removeSpaces(show.name, ' ', '_'),
 			metacritic_url: removeSpaces(show.name, ' ', '-')
 		};
-		// element = document.getElementById('button2');
-		// element.style.borderBottom = 'thick solid #4BB543';
-		// element.style.borderRadius = '8px';
 	}
 
 	async function getAnimatedMovieDetails() {
@@ -138,9 +131,6 @@
 			rotten_tomatoes_url: removeSpaces(animatedMovie.title, ' ', '_'),
 			metacritic_url: removeSpaces(animatedMovie.title, ' ', '-')
 		};
-		// element = document.getElementById('button3');
-		// element.style.borderBottom = 'thick solid #4BB543';
-		// element.style.borderRadius = '8px';
 	}
 
 	async function getAnimeDetails() {
@@ -171,9 +161,6 @@
 			rotten_tomatoes_url: removeSpaces(anime.name, ' ', '_'),
 			metacritic_url: removeSpaces(anime.name, ' ', '-')
 		};
-		// element = document.getElementById('button4');
-		// element.style.borderBottom = 'thick solid #4BB543';
-		// element.style.borderRadius = '8px';
 	}
 
 	const deleteData = () => {
@@ -181,7 +168,6 @@
 		show = 0;
 		animatedMovie = 0;
 		anime = 0;
-		// element.style.border = null;
 	};
 
 	const getDetails = () => {
@@ -202,12 +188,13 @@
 	};
 </script>
 
-<div
-	class=" antialiased relative h-screen w-full flex flex-col justify-center text-center bg-cover bg-black"
-	style="background-image: url('/backgroundimage.png');"
+<section
+	class=" relative min-h-screen w-full flex flex-col justify-center text-center bg-[#121212] px-2 py-10"
 >
+	<div style="background-image: url('/backgroundimage.png');" class="z-0 opacity-50 w-full h-screen fixed top-0 left-0 lg:bg-cover bg-center"></div>
+
 	<!-- <img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" /> -->
-	<div class=" flex flex-col lg:w-3/4 w-full mx-auto lg:gap-3 gap-2 gap-y-7 selection:bg-cyan-600">
+	<div class="z-10 flex flex-col lg:w-3/4 w-full mx-auto lg:gap-3 gap-2 gap-y-7 selection:bg-cyan-600 py-2">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
 		{:else if show}
@@ -223,12 +210,13 @@
 		{/if}
 
 		{#if initialAnimate}
-			<div class=" font-bold lg:text-7xl text-4xl rounded-2xl grow-0 lg:m-3 m-2 select-none">
-				<button
+			<div class="relative font-bold lg:text-7xl text-4xl rounded-2xl grow-0 lg:m-3 m-2 select-none">
+				<h1
 					on:click={getDetails}
-					class=" text-transparent delay-100 transition bg-clip-text bg-gradient-to-r hover:from-green-500 hover:to-emerald-400 cursor-pointer from-sky-500 to-sky-600"
-					>SUGGEST ME AMAN</button
+					class=" text-transparent hover:scale-105 delay-100 transition bg-clip-text bg-gradient-to-r from-green-500 to-emerald-400 cursor-pointer"
+					>SUGGEST ME AMAN</h1
 				>
+<!--				<span class="self-end text-white text-xs">Click Me</span>-->
 			</div>
 
 			<div class="flex flex-row lg:gap-2 gap-1 justify-center grow-0 lg:font-bold font-semibold">
@@ -238,19 +226,18 @@
 						delay: 300,
 						easing: backOut
 					}}
-					id="button1"
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					{#if movie}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							class=" rounded-full lg:text-base text-xs text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Movies</button
 						>
 					{:else}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-75 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-75 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'movies';
 							}}>Movies</button
@@ -263,19 +250,18 @@
 						delay: 400,
 						easing: backOut
 					}}
-					id="button2"
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					{#if show}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Shows</button
 						>
 					{:else}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'shows';
 							}}>Shows</button
@@ -289,19 +275,18 @@
 						delay: 500,
 						easing: backOut
 					}}
-					id="button3"
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					{#if animatedMovie}
 						<button
 							style="background-color:#F03A47"
-							class="rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Animated Movies</button
 						>
 					{:else}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'animatedMovies';
 							}}>Animated Movies</button
@@ -314,51 +299,32 @@
 						delay: 600,
 						easing: backOut
 					}}
-					id="button4"
 					class=" hover:scale-110 delay-75 transition p-0.5"
 				>
 					{#if anime}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"
 							>Anime</button
 						>
 					{:else}
 						<button
 							style="background-color:#F03A47"
-							class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
+							class="lg:text-base text-xs rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"
 							on:click={() => {
 								currentSelected = 'anime';
 							}}>Anime</button
 						>
 					{/if}
 				</div>
-<!--				<div-->
-<!--					transition:fly={{-->
-<!--						y: 50,-->
-<!--						delay: 600,-->
-<!--						easing: backOut-->
-<!--					}}-->
-<!--					id="button4"-->
-<!--					class=" hover:scale-110 delay-75 transition p-0.5"-->
-<!--				>-->
-					<!--{#if game}-->
-					<!--	<button-->
-					<!--		style="background-color:#F03A47"-->
-					<!--		class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 shadow-md shadow-emerald-500"-->
-					<!--		>Games</button-->
-					<!--	>-->
-					<!--{:else}-->
-					<!--	<button-->
-					<!--		style="background-color:#F03A47"-->
-					<!--		class=" rounded-full text-white px-4 py-2 cursor-pointer transition delay-100 hover:shadow-md active:shadow-lg active:shadow-emerald-500 hover:shadow-emerald-400"-->
-					<!--		on:click={() => {-->
-					<!--			currentSelected = 'games';-->
-					<!--		}}>Games</button-->
-					<!--	>-->
-					<!--{/if}-->
-<!--				</div>-->
 			</div>
 		{/if}
 	</div>
-</div>
+	<footer class="absolute bottom-0 left-0 text-white w-full lg:text-lg text-sm lg:p-5 p-2 z-10 flex flex-row justify-center items-center lg:gap-4 gap-2">
+		<p>Made with SvelteKit, TailwindCSS and TheMovieDB</p>
+		<a target="_blank" href="https://github.com/AmanVarshney01/SuggestMeAman">
+			<img src="/github.svg" class="hover:animate-spin lg:w-8 lg:h-8 h-6 w-6 bg-white rounded-full border border-white" alt="Github">
+		</a>
+	</footer>
+</section>
+

@@ -15,14 +15,14 @@
 </script>
 
 <div in:fade out:fade class=" flex lg:flex-row flex-col mx-auto grow-0 h-auto lg:max-w-fit gap-2">
-	<div class=" shadow-sm">
+	<div class=" flex justify-center items-center shadow-sm">
 		<img
-			class=" rounded-lg"
+			class="w-auto h-[40vh] lg:h-fit lg:w-fit rounded-lg"
 			src="https://image.tmdb.org/t/p/w342/{poster_path}"
 			alt="{title} Poster"
 		/>
 	</div>
-	<div class=" flex flex-col w-2/3 text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-sm">
+	<div class=" flex flex-col lg:w-2/3 w-full text-stone-800 bg-stone-100 rounded-lg gap-x-10 p-6 shadow-sm">
 		<h1 class=" font-bold font-mono text-3xl my-4 select-all">{title}</h1>
 		<div class="flex flex-row justify-around mx-auto text-center my-1 gap-5">
 			<span>{genre}</span>

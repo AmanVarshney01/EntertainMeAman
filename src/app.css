@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
-    @font-face {
-        font-family: "headingfont";
-        src: local('headingfont'), url("");
-    }
-} */
+body {
+    @apply font-sans antialiased;
+}
