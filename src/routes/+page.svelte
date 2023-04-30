@@ -194,7 +194,7 @@
 	<div style="background-image: url('/backgroundimage.png');" class="z-0 opacity-50 w-full h-screen fixed top-0 left-0 lg:bg-cover bg-center"></div>
 
 	<!-- <img class=" absolute bottom-28 left-10 animate-spin w-auto h-auto" src="/roller1.png" alt="" /> -->
-	<div class="z-10 flex flex-col lg:w-3/4 w-full mx-auto lg:gap-3 gap-2 gap-y-7 selection:bg-cyan-600 py-2">
+	<div class="z-10 flex flex-col lg:w-3/4 w-full mx-auto lg:gap-3 gap-2 gap-y-7 selection:bg-cyan-600 mb-10">
 		{#if movie}
 			<MoviePanel {...movieDetails} />
 		{:else if show}
@@ -205,8 +205,6 @@
 			<TvPanel {...animeDetails} />
 		<!--{:else if game}-->
 		<!--	<GamePanel {...gameDetails} />-->
-		{:else}
-			<div class=""></div>
 		{/if}
 
 		{#if initialAnimate}

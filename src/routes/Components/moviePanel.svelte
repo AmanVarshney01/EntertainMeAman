@@ -17,7 +17,7 @@
 <div in:fade out:fade class=" flex lg:flex-row flex-col mx-auto grow-0 h-auto lg:max-w-fit gap-2">
 	<div class=" flex justify-center items-center shadow-sm">
 		<img
-			class="w-auto h-[40vh] lg:h-fit lg:w-fit rounded-lg"
+			class="w-auto lg:h-fit lg:w-fit rounded-lg border border-white border-opacity-50 shadow-md"
 			src="https://image.tmdb.org/t/p/w342/{poster_path}"
 			alt="{title} Poster"
 		/>
@@ -30,7 +30,7 @@
 			<span>{date}</span>
 			<span>{runtime} mins</span>
 		</div>
-		<p class=" text-left text-lg my-8">{overview}...</p>
+		<p class=" text-left text-lg my-8 flex-1">{overview}...</p>
 		<div class=" flex flex-row gap-x-10 my-4 justify-center content-center">
 			<a
 				class=" hover:border-b-2 border-cyan-700"
